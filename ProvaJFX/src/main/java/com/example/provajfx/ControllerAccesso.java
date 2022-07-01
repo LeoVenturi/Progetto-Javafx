@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import Medico;
 
 import java.io.IOException;
 
@@ -33,10 +34,10 @@ public class ControllerAccesso {
         System.out.println(u);
         System.out.println(p);
 
-        /*int f = findMed_Username(u);
-        if(getFarmacologo(f) == 0){*/
+        int f = getMed_Username(u);
+        if(getFarmacologo(f) == 0){
         try {
-            root = FXMLLoader.load(getClass().getResource("ControllerSegnalazione.fxml"));
+            root = FXMLLoader.load(getClass().getResource("Segnalazione.fxml"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -44,7 +45,7 @@ public class ControllerAccesso {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-        /*} else{
+        } /*else{
         try {
             root = FXMLLoader.load(getClass().getResource(".fxml"));
         } catch (IOException e) {
@@ -53,7 +54,7 @@ public class ControllerAccesso {
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
-        stage.show();}*/
+        stage.show();*/}
     }
 
     public String getAccessoUser(){

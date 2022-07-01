@@ -26,9 +26,9 @@ public class ControllerSegnalazione {
     String[] Pazienti = {};
 
     int Livelli[] = {1, 2, 3, 4, 5};
-
+/*
     RischioCombobox.getItems().add(1);
 
     PazienteCombobox.setPromptText("Codice Paziente");
-    RischioCombobox.setPromptText("Livello Gravità");
+    RischioCombobox.setPromptText("Livello Gravità");*/
 }
