@@ -1,0 +1,93 @@
+package application;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+
+public class Vaccinazioni extends Paziente{
+	private int codice_paziente;
+	private ArrayList<String> segnalazioni = new ArrayList<String>();//??
+	private String vaccino;
+	private String vaccini[] = {"AstraZeneca", "Pfizer", "Moderna", "Sputnik", "Sinovac", "antinfluenzale"};
+	private ArrayList<String> vaccini_possibili = new ArrayList<String>(Arrays.asList(vaccini));
+	private String dose;
+	private String dosi[] = {"I", "II", "III", "IV", "dose unica"};
+	private ArrayList<String> dosi_possibili = new ArrayList<String>(Arrays.asList(dosi));
+	private String sede;
+	private int anno_vaccinazione;
+	
+	
+//	int Vaccinazioni_Codice[] = {};
+//	int Vaccinazioni_CodicePaziente[] = {};
+//	String Tipo_Vaccino[] = {};
+//	int Vaccinazioni_NSomministrazione[] = {}; 
+//	String Vaccinazioni_Sede[] = {};
+//	String Vaccinazioni_Data[] = {};
+	
+	public void costruttore(int codice, String vaccino, String dose, String sede, int anno) {
+		if(esiste_paziente(codice) == 1)
+			this.codice_paziente = codice;
+		else
+			throw new IllegalArgumentException();
+		
+		if(vaccini_possibili.contains(vaccino))
+			this.vaccino = vaccino;
+		else
+			throw new IllegalArgumentException();
+		
+		if(dosi_possibili.contains(dose))
+			this.dose  = dose;
+		else
+			throw new IllegalArgumentException();
+		
+		this.sede = sede;
+		
+		if(anno <= getPaz_AnnoNascita(codice))
+			this.anno_vaccinazione = anno;	
+		else
+			throw new IllegalArgumentException();
+		
+	}
+
+//	public int getVaccinazioni_Codice(int i) {
+//		return Vaccinazioni_Codice[i];
+//	}
+//	
+//	public int getVaccinazioni_CodicePaziente(int i) {
+//		return Vaccinazioni_CodicePaziente[i];
+//	}
+//	
+//	public String getTipo_Vaccino(int i) {
+//		return Tipo_Vaccino[i];
+//	}
+//	
+//	public int getVaccinazioni_NSomministrazione(int i) {
+//		return Vaccinazioni_NSomministrazione[i];
+//	}
+//	
+//	public String getVaccinazioni_Sede(int i) {
+//		return Vaccinazioni_Sede[i];
+//	}
+//	
+//	public String getVaccinazioni_Data(int i) {
+//		return Vaccinazioni_Data[i];
+//	}
+	
+	
+	
+	
+
+		
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}
