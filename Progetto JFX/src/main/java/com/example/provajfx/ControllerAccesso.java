@@ -47,8 +47,8 @@ public class ControllerAccesso {
         return Farmacologo[i];
     }
 //----------------------------------------------
-    //----------------------------------------------
-    //----------------------------------------------
+    //----------------------------------------------aaaa
+
 
 
     public void accedi(ActionEvent event) throws IOException{
