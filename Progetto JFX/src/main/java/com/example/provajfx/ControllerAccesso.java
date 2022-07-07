@@ -1,11 +1,13 @@
 package com.example.provajfx;
 
 import javafx.fxml.FXML;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -30,8 +32,8 @@ public class ControllerAccesso {
     private Scene scene;
     private Parent root;
 //----------------------prova---------------------
-    String Med_Username[] = {"M000", "M001", "M002"};
-    String Med_Password[] = {"AAAA", "BBBB", "CCCC"};
+    String Med_Username[] = {"1", "M001", "M002"};
+    String Med_Password[] = {"1", "BBBB", "CCCC"};
     int Farmacologo[] = {0, 0, 1};
     List<Integer> Medico_CodiciPazienti = new ArrayList<Integer>();
 
@@ -46,10 +48,6 @@ public class ControllerAccesso {
     public int getFarmacologo(int i) {
         return Farmacologo[i];
     }
-//----------------------------------------------
-    //----------------------------------------------aaaa
-
-
 
     public void accedi(ActionEvent event) throws IOException{
         u = UsenameTextfield.getText();
@@ -58,31 +56,26 @@ public class ControllerAccesso {
         System.out.println(p);
 
         int f = findMed_Username(u);
+        System.out.println("il valore di f -> "+ f);
+		if (getFarmacologo(f) == 0) {	// fallisce qua, mettendo false va meglio
+			root = FXMLLoader.load(getClass().getResource("Segnalazione.fxml"));
+			stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			scene = new Scene(root);
+			stage.setScene(scene);
+			stage.show();
 
-        if (getFarmacologo(f) == 0) {
-            root = FXMLLoader.load(getClass().getResource("Segnalazione.fxml"));
-            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-            scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
+		} else {
+			System.out.println("sono qua, autentificazione fallita");
+			Alert alert = new Alert(AlertType.INFORMATION );
+			alert.setTitle("Informazione");
+			alert.setHeaderText("Look, an Information Dialog");
+			alert.setContentText("La password o username incorretti");
+			UsenameTextfield.clear();
+			PasswordTextfield.clear();
+			
+		}
+	}
 
-        }
-        /*else{
-        try {
-            root = FXMLLoader.load(getClass().getResource(".fxml"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();}*/}
-
-    /*public void accedi(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("Segnalazione.fxml"));
-        Stage window = (Stage) AccediButton.getScene().getWindow();
-        window.setScene(new Scene(root, 600, 400));
-    }*/
 
     public String getAccessoUser(){
         return u;
