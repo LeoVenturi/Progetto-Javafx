@@ -13,6 +13,6 @@
       <TextArea layoutX="365.0" layoutY="76.0" prefHeight="200.0" prefWidth="200.0" text="Descrizione" />
       <ComboBox layoutX="77.0" layoutY="251.0" prefWidth="150.0" />
       <ComboBox layoutX="77.0" layoutY="51.0" prefWidth="150.0" />
-      <Button fx:id="SegnalazioneButton" layoutX="445.0" layoutY="321.0" mnemonicParsing="false" onAction="#sendsegnalazione" text="Invia" />
+      <Button fx:id="SegnalazioneButton" layoutX="445.0" layoutY="321.0" mnemonicParsing="false" text="Invia" />
    </children>
 </AnchorPane>

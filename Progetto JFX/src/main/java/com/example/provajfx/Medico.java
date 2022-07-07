@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Medico {
+	ArrayList<Paziente> lista_pazienti = new ArrayList<Paziente>();
 	String Med_Username[] = {"M000", "M001", "M002"};
 	String Med_Password[] = {"AAAA", "BBBB", "CCCC"};
 	int Farmacologo[] = {0, 0, 1};
@@ -16,16 +17,22 @@ public class Medico {
 		return c;
 	}
 	
-	public String getMed_Username(int i) {
-		return Med_Username[i];
+	public String getMed_Username(String i) {
+		for(int Med = 0; Med < Med_Username.length; Med++)
+			if(Med_Username[Med] == i)
+				return Med_Username[Med];
+		return null;
 	}
 	
 	public String getMed_Password(int i) {
 		return Med_Password[i];
 	}
 	
-	public int getFarmacologo(int i) {
-		return Farmacologo[i];
+	public int getFarmacologo(String i) {
+		for(int Med = 0; Med < Med_Username.length; Med++)
+			if(Med_Username[Med] == i)
+				return Farmacologo[Med];
+		return -1;
 	}
 	
 	public void addMedico_CodiciPazienti(int i) {
