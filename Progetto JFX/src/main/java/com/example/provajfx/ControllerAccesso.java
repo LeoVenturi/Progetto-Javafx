@@ -36,7 +36,7 @@ public class ControllerAccesso extends Medico{
         String pass = PasswordTextfield.getText();
 
 		if (findMed_Username(pass, user)) {	// fallisce qua, mettendo false va meglio
-			root = FXMLLoader.load(getClass().getResource("Segnalazione.fxml"));
+			root = FXMLLoader.load(getClass().getResource("InterfacciaMedico.fxml"));
 			stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			scene = new Scene(root);
 			stage.setScene(scene);

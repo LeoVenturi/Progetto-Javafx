@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
-public class Vaccinazioni extends Paziente{
+public class Vaccinazioni {
 	private int codice_paziente;
 	private ArrayList<String> segnalazioni = new ArrayList<String>();//??
 	private String vaccino;
@@ -24,11 +24,10 @@ public class Vaccinazioni extends Paziente{
 //	String Vaccinazioni_Sede[] = {};
 //	String Vaccinazioni_Data[] = {};
 
-	public void costruttore(int codice, String vaccino, String dose, String sede, int anno) {
-		if(esiste_paziente(codice) == 1)
-			this.codice_paziente = codice;
-		else
-			throw new IllegalArgumentException();
+	public Vaccinazioni(int codice, String vaccino, String dose, String sede, int anno) {
+
+		this.codice_paziente = codice;
+
 
 		if(vaccini_possibili.contains(vaccino))
 			this.vaccino = vaccino;
@@ -42,10 +41,9 @@ public class Vaccinazioni extends Paziente{
 
 		this.sede = sede;
 
-		if(anno <= getPaz_AnnoNascita(codice))
-			this.anno_vaccinazione = anno;
-		else
-			throw new IllegalArgumentException();
+		//aggiungere controll ovalidità anno
+		this.anno_vaccinazione = anno;
+
 
 	}
 
@@ -72,22 +70,4 @@ public class Vaccinazioni extends Paziente{
 //	public String getVaccinazioni_Data(int i) {
 //		return Vaccinazioni_Data[i];
 //	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
