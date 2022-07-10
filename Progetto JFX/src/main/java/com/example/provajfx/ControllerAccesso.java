@@ -40,6 +40,7 @@ public class ControllerAccesso {
     
     private ArrayList<Medico> listaMedici = new ArrayList<>();
     
+    
     private boolean trovaMedico(String nome, String pass) {
     	for(Medico i: listaMedici) {
     		if( i.findMed_Username(nome, pass))
