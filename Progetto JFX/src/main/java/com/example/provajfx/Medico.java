@@ -6,6 +6,7 @@ import java.util.Map;
 
 public class Medico extends Accessi {
 	private ArrayList<Paziente> lista_pazienti = new ArrayList<Paziente>();
+	private ArrayList<Segnalazioni> segnalazioni = new ArrayList<>();
 	public Medico(String pass, String nomeUtente) {
 		super(pass, nomeUtente);
 	}
@@ -18,7 +19,10 @@ public class Medico extends Accessi {
 	public  ArrayList<Paziente> getPazienti(){
 		return this.lista_pazienti;
 	}
-
+	
+	public void addSegnalazione(Segnalazioni segnalazione) {
+		this.segnalazioni.add(segnalazione);
+	}
 	
 	
 }
