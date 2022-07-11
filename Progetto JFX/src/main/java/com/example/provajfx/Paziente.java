@@ -12,7 +12,7 @@ public class Paziente {
 		private ArrayList<FattoreRischio> fattori = new ArrayList<>();
 		ArrayList<Vaccinazioni> vaccini = new ArrayList<Vaccinazioni>();
 		private int codice_assegnato = 0;
-		private String Provincie[] = {"AG", "AL", "AN", "AO", "AQ", "AR", "AP", "AT",
+		private static String Provincie[] = {"AG", "AL", "AN", "AO", "AQ", "AR", "AP", "AT",
 				"AV", "BA", "BT", "BL", "BN", "BG", "BI", "BO", "BZ", "BS", "BR", "CA", "CL",
 				"CB", "CI", "CE", "CT", "CZ", "CH", "CO", "CS", "CR", "KR", "CN", "EN", "FM",
 				"FE", "FI", "FG", "FC", "FR", "GE", "GO", "GR", "IM", "IS", "SP", "LT", "LE",
@@ -57,7 +57,16 @@ public class Paziente {
 			//mancano i vaccini
 
 		}
-
+		
+		public ArrayList<Vaccinazioni> getVaccino(){
+			return this.vaccini;
+		}
+		
+		public String getProvincia() {
+			return this.provincia;
+		}
+		
+		
 
 
 	}
