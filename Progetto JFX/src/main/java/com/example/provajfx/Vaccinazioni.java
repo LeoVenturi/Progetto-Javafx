@@ -3,10 +3,12 @@ package com.example.provajfx;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map;
 
 public class Vaccinazioni {
+	
 	private int codice_paziente;
-	private ArrayList<String> segnalazioni = new ArrayList<String>();//??
+	private Segnalazioni segnalazioni;
 	private String vaccino;
 	private String vaccini[] = {"AstraZeneca", "Pfizer", "Moderna", "Sputnik", "Sinovac", "antinfluenzale"};
 	private ArrayList<String> vaccini_possibili = new ArrayList<String>(Arrays.asList(vaccini));
@@ -15,8 +17,10 @@ public class Vaccinazioni {
 	private ArrayList<String> dosi_possibili = new ArrayList<String>(Arrays.asList(dosi));
 	private String sede;
 	private int anno_vaccinazione;
+	
+	
 
-
+	
 //	int Vaccinazioni_Codice[] = {};
 //	int Vaccinazioni_CodicePaziente[] = {};
 //	String Tipo_Vaccino[] = {};
@@ -45,6 +49,16 @@ public class Vaccinazioni {
 		this.anno_vaccinazione = anno;
 
 
+	}
+	public String getVaccino() {
+		return this.vaccino;
+	}
+	public Segnalazioni getSegnalazione() {
+		return this.segnalazioni;
+	}
+	
+	public String getSede() {
+		return this.sede;
 	}
 
 //	public int getVaccinazioni_Codice(int i) {
