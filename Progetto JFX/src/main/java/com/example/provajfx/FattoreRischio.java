@@ -2,30 +2,27 @@ package com.example.provajfx;
 
 public class FattoreRischio {
 		private int  codice;
-		private String  nome;
+		private String  tipo;
 		private String  descrizione;
 		private int  livello;
 		private int  fattore;
-
+	private int codice_assegnato = 0;
+/*
 		int FattoreRischio_Codice[] = {100, 101, 102};
 		String FattoreRischio_Nome[] = {"Fumatore", "Iperteso", "Sovrappeso"};
 		String FattoreRischio_Descrizione[] = {"Aa", "Bb", "Cc"};
 		int FattoreRischio_Livello[] = {1, 2, 3};
-		int FattoreRischio_Paziente[] = {000, 000, 001};
+		int FattoreRischio_Paziente[] = {000, 000, 001};*/
 
-		public FattoreRischio(int codice, String nome, String descrizione, int livello, int fattore) {
-			this.codice = codice;
-
-			if((livello < 1 || livello > 5) && descrizione == null && nome == null )
+		public FattoreRischio(String tipo, String descrizione, int livello) {
+			this.tipo = tipo;
+			if((livello < 1 || livello > 5) && descrizione == null && tipo == null )
 				throw new IllegalArgumentException();
 
 			this.livello = livello;
 			this.descrizione = descrizione;
-
-			this.nome = nome;
-			this.fattore = fattore;
 		}
-
+/*
 		public int FattoreRischio_Codice(int i) {
 			return FattoreRischio_Codice[i];
 		}
@@ -44,5 +41,5 @@ public class FattoreRischio {
 
 		public int getFattoreRischio_Paziente(int i) {
 			return FattoreRischio_Paziente[i];
-		}
+		}*/
 	}
