@@ -4,26 +4,25 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Medico {
+public class Medico extends Accessi {
 	private ArrayList<Paziente> lista_pazienti = new ArrayList<Paziente>();
-	private Map<String,String> utenti = new HashMap<>();	// utente + password
-
-
-	
+	private ArrayList<Segnalazioni> segnalazioni = new ArrayList<>();
 	public Medico(String pass, String nomeUtente) {
-		if(pass == null && nomeUtente == null)
-			throw new IllegalArgumentException();
-		this.utenti.put(nomeUtente, pass);
+		super(pass, nomeUtente);
+	}
+	
+	public boolean find_utente(String user, String password) {
+		return super.findMed_Username(user, password);
 		
 	}
 	
-	public boolean findMed_Username(String username, String password) {	// ricerca nel map, se trova ritorna
-			for(Map.Entry<String, String> utente: utenti.entrySet())	{		// true, altrimente ritornera false
-				if(utente.getValue().compareTo(username) == 0 && utente.getKey().compareTo(password) == 0) {
-					return true;
-				}}
-			return false;
-
+	public  ArrayList<Paziente> getPazienti(){
+		return this.lista_pazienti;
 	}
+	
+	public void addSegnalazione(Segnalazioni segnalazione) {
+		this.segnalazioni.add(segnalazione);
+	}
+	
 	
 }
