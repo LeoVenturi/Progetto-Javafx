@@ -15,7 +15,9 @@ import com.example.provajfx.Medico;
 
 // sono stato qyua
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class ControllerAccesso {
@@ -32,6 +34,7 @@ public class ControllerAccesso {
     private Stage stage;
     private Scene scene;
     private Parent root;
+    
     
     private Medico m1 = new Medico("1", "1");
     private Medico m2 = new Medico("2", "2");
@@ -73,15 +76,22 @@ public class ControllerAccesso {
 			alert.showAndWait();
 			UsenameTextfield.clear();
 			PasswordTextfield.clear();
-			
 		}
 	}
 
+//// Implemento la funzione del tempo
+    Calendar c = Calendar.getInstance(); 							// prende il giorno attuale
+	SimpleDateFormat df = new SimpleDateFormat("EEE dd/MM/yyyy");   // scelgo il formato da usare
+    
+	 public void avanzaDiUnGiorno(ActionEvent event) throws IOException{
+		 c.add(Calendar.DATE, 1);									// aggiunge un giorno
+		 if(c.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY) {
+			 Farmacologo.mandaSegnale();
+		 }
+	 }
+}	
 
-//    public String getAccessoUser(){
-//        return user;
-//    }
-//    public String getAccessoPass(){
-//        return p;
-//    }
-}
+
+
+
+

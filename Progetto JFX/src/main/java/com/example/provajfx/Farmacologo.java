@@ -9,7 +9,9 @@ import java.util.TreeMap;
 
 public class Farmacologo extends Accessi{
 	private ArrayList<Medico> medici = new ArrayList<>();
-	private boolean segnale = false;
+
+	static boolean segnale = false;		// messa a static in modo che tutti i farmacologi abbiano lo stesso attributo
+
 	private Map<String, Integer> num_segnalazioni = new HashMap<>();
 	private Map<String, Integer> num_segnalazioni_provincia = new TreeMap<>();
 	private Map<String, Integer> num_segnalazioni_sede = new HashMap<>();
@@ -21,12 +23,13 @@ public class Farmacologo extends Accessi{
 		
 	}
 	
-	public void mandaSegnale() {
-		this.segnale = true;
-	}
+
+	static void mandaSegnale() {		// diventato metodo di classe, applicabile a 
+		Farmacologo.segnale = true;		// qualunque istanza di farmacologo, non invocato 
+	}									// su qualcuno di preciso, usato in "ControllerAccesso riga 86"
 	
-	public void deleteSegnale() {
-		this.segnale = false;
+	static void deleteSegnale() {
+		Farmacologo.segnale = false;
 	}
 	public boolean find_utente(String user, String password) {
 		return super.findMed_Username(user, password);
