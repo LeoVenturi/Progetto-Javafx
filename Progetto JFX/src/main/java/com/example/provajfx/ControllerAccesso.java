@@ -2,13 +2,17 @@ package com.example.provajfx;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.ValueAxis;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import com.example.provajfx.Medico;
@@ -34,6 +38,8 @@ public class ControllerAccesso {
     private Stage stage;
     private Scene scene;
     private Parent root;
+    
+
     
     
     private Medico m1 = new Medico("1", "1");
@@ -65,6 +71,7 @@ public class ControllerAccesso {
 		if (trovaMedico(user, pass)) {	// fallisce qua, mettendo false va meglio
 			root = FXMLLoader.load(getClass().getResource("InterfacciaMedico.fxml"));
 			stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+	
 			scene = new Scene(root);
 			stage.setScene(scene);
 			stage.show();
