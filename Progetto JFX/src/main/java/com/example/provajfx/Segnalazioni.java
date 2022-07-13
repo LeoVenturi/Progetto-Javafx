@@ -9,7 +9,7 @@ public class Segnalazioni {
 	public int codice;
 	public Paziente paziente;
 	public ReazioneAvversa reazione;
-	public int data;
+	public String data;
 //	List<Integer> Segnalazioni_Codice = new ArrayList<Integer>();
 //	List<Integer> Segnalazioni_CodicePaziente = new ArrayList<Integer>();
 //	List<Integer> Segnalazioni_CodiceReazione_Avversa = new ArrayList<Integer>();
@@ -18,7 +18,7 @@ public class Segnalazioni {
 //	//List Segnalazioni_Vaccinazioni2MesiP = new ArrayList();
 
 
-	public Segnalazioni(int codice, Paziente paziente, ReazioneAvversa reazioni, int data) {
+	public Segnalazioni(int codice, Paziente paziente, ReazioneAvversa reazioni, String data) {
 		//aggiungere controlli
 		this.codice = codice;
 		this.paziente = paziente;
@@ -38,7 +38,7 @@ public class Segnalazioni {
 		return this.reazione;
 	}
 
-	public int getData() {
+	public String getData() {
 		return this.data;
 	}
 //

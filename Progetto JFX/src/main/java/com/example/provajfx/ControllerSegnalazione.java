@@ -39,11 +39,8 @@ public class ControllerSegnalazione implements Initializable{ // aggiunge sia se
     private Scene scene;
     private Parent root;
 
-    //private final String[] I_Livelli = {"1", "2", "3", "4", "5"};
-    //private final ObservableList<String> L_Livelli = FXCollections.observableArrayList(I_Livelli);
-
-
-
+    private final String[] codici = {};
+    private final ObservableList<String> L_Codici = FXCollections.observableArrayList(codici);
 
 
     public void invia(ActionEvent event) throws IOException {
@@ -51,8 +48,11 @@ public class ControllerSegnalazione implements Initializable{ // aggiunge sia se
         String data = DataTextfield.getText();
         String descrizione = DescrizioneTextarea.getText();
 
-        int prov = (int) RischioCombobox.getSelectionModel().getSelectedItem();
+        int grav = (int) RischioCombobox.getSelectionModel().getSelectedItem();
+        //int cod = (int) PazienteCombobox.getSelectionModel().getSelectedItem();
 
+
+        //new Segnalazioni();
 
         //--------------------------------------
         root = FXMLLoader.load(getClass().getResource("InterfacciaMedico.fxml"));
@@ -71,7 +71,7 @@ public class ControllerSegnalazione implements Initializable{ // aggiunge sia se
     }
 
     public void initialize(URL url, ResourceBundle resourcebundle){
-        //RischioCombobox.setItems(L_Livelli);
+        //RischioCombobox.setItems(L_Codici);
         RischioCombobox.getItems().addAll(1, 2, 3, 4, 5);
     }
 }

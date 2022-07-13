@@ -32,7 +32,6 @@ public class Vaccinazioni {
 
 		this.codice_paziente = codice;
 
-
 		if(vaccini_possibili.contains(vaccino))
 			this.vaccino = vaccino;
 		else

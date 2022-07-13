@@ -2,7 +2,7 @@ package com.example.provajfx;
 
 public class FattoreRischio {
 		private int  codice;
-		private String  tipo;
+		private int  tipo;
 		private String  descrizione;
 		private int  livello;
 		private int  fattore;
@@ -14,9 +14,9 @@ public class FattoreRischio {
 		int FattoreRischio_Livello[] = {1, 2, 3};
 		int FattoreRischio_Paziente[] = {000, 000, 001};*/
 
-		public FattoreRischio(String tipo, String descrizione, int livello) {
+		public FattoreRischio(int tipo, String descrizione, int livello) {
 			this.tipo = tipo;
-			if((livello < 1 || livello > 5) && descrizione == null && tipo == null )
+			if((livello < 1 || livello > 5) && descrizione == null)
 				throw new IllegalArgumentException();
 
 			this.livello = livello;

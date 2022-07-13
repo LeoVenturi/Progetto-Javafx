@@ -15,8 +15,15 @@ public class Medico extends Accessi {
 		return super.findMed_Username(user, password);
 		
 	}
-	
-	public  ArrayList<Paziente> getPazienti(){
+
+	public String returnPass(){
+		String acc = "";
+		for(Paziente paziente: lista_pazienti)
+			acc += paziente.toString() + "\n";
+		return acc;
+	}
+
+	public ArrayList<Paziente> getPazienti(){
 		return this.lista_pazienti;
 	}
 	

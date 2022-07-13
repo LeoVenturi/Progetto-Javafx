@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class ControllerInterfacciaMedico {
+public class ControllerInterfacciaMedico extends ControllerAccesso{
 
     @FXML
     private Button SegnalazioneButton;
@@ -26,6 +26,8 @@ public class ControllerInterfacciaMedico {
     private Scene scene;
     private Parent root;
 
+    //Medico medico1= getMedico();
+
     public void segnalazione (ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("Segnalazione.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -35,7 +37,7 @@ public class ControllerInterfacciaMedico {
     }
 
     public void paziente (ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("Segnalazione.fxml"));
+        root = FXMLLoader.load(getClass().getResource("Paziente.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -43,6 +45,8 @@ public class ControllerInterfacciaMedico {
     }
 
     public void indietro (ActionEvent event) throws IOException {
+        //Medico medico1= getMedico();
+        //printf(toString(medico1));
         root = FXMLLoader.load(getClass().getResource("Accesso.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);

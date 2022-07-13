@@ -30,7 +30,7 @@ public class Paziente {
 		//int Paz_NReazioni_Avverse[] = {0, 0, 0};
 		//int Paz_NVaccini[] = {1, 2, 3};
 
-		public Paziente(int anno, String provincia, String professione, ArrayList<FattoreRischio> fattori_rischio) {
+		public Paziente(int anno, String provincia, String professione, ArrayList<FattoreRischio> fattori_rischio, ArrayList<Vaccinazioni> vaccinazioni) {
 			//aggiunta codice univoco paziente
 			this.codice = codice_assegnato;
 			codice_assegnato ++;
@@ -53,8 +53,8 @@ public class Paziente {
 			//aggiunta fattori a rischio
 			this.fattori = fattori_rischio;
 
-
-			//mancano i vaccini
+			//aggiunta vaccinazioni
+			this.vaccini = vaccinazioni;
 
 		}
 		
@@ -65,6 +65,8 @@ public class Paziente {
 		public String getProvincia() {
 			return this.provincia;
 		}
+
+		public int getCodice() {return this.codice;}
 		
 		
 

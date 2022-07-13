@@ -11,12 +11,10 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import com.example.provajfx.Medico;
 
 // sono stato qyua
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class ControllerAccesso {
 
@@ -32,12 +30,24 @@ public class ControllerAccesso {
     private Stage stage;
     private Scene scene;
     private Parent root;
+
+    String user;
+    String pass;
     
     private Medico m1 = new Medico("1", "1");
     private Medico m2 = new Medico("2", "2");
     private Medico m3 = new Medico("3", "3");
     private Medico m4 = new Medico("4", "4");
-    
+
+    /*Vaccinazioni a1 = new Vaccinazioni(1, "DFg", "II", "VR", 2022);
+    FattoreRischio a2 = new FattoreRischio(12, "Gamba", 1);
+
+    ArrayList <FattoreRischio> b1 = new ArrayList<>();
+    ArrayList <Vaccinazioni> b2 = new ArrayList<>();
+    b2.add(a1);
+
+    private Paziente p1 = new Paziente( 5, "VR", "AAAA", , );*/
+
     private ArrayList<Medico> listaMedici = new ArrayList<>();
     
     
@@ -49,10 +59,23 @@ public class ControllerAccesso {
     	return false;
     }
 
+    private Medico ritornaMedico(String nome, String pass) {
+        for(Medico i: listaMedici) {
+            if( i.findMed_Username(nome, pass))
+                return i;
+        }
+        return null;
+    }
+
+    public Medico getMedico(){
+        if (user == null || pass == null)
+            System.out.println("Parametri non ancora settati.");
+        return ritornaMedico(user, pass);
+    }
 
     public void accedi(ActionEvent event) throws IOException{
-        String user = UsenameTextfield.getText();
-        String pass = PasswordTextfield.getText();
+        user = UsenameTextfield.getText();
+        pass = PasswordTextfield.getText();
         listaMedici.add(m1);
         listaMedici.add(m2);
         listaMedici.add(m3);

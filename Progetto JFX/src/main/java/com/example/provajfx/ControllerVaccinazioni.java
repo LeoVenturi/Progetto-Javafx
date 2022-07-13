@@ -10,7 +10,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -18,42 +17,48 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ControllerFattoriRischio {
+public class ControllerVaccinazioni {
 
     @FXML
-    private ComboBox Tipo;
+    private ComboBox NomeVaccino;
     @FXML
-    private ComboBox Livello;
+    private ComboBox TipoSomm;
     @FXML
-    private TextArea Descrizione;
+    private TextField Sede;
     @FXML
-    private Button InviaButton;
+    private TextField Data;
     @FXML
-    private Button BackButton;
+    private Button InviaButt;
+    @FXML
+    private Button Backbutt;
 
     private Stage stage;
     private Scene scene;
     private Parent root;
 
-    private String Tipi[] = {"Paziente fumatore", "Iperteso", "Sovrappeso", "Paziente fragile per precedenti patologie cardiovascolari/oncologiche"};
-
-    private final ObservableList<String> L_Tipi = FXCollections.observableArrayList(Tipi);
+    private final String[] nomi = {"AstraZeneca", "Pfizer", "Moderna", "Sputnik", "Sinovac", "Antinfluenzale"};
+    private final ObservableList<String> Nomi = FXCollections.observableArrayList(nomi);
 
     public void invia(ActionEvent event) throws IOException {
-        String descrizione = Descrizione.getText();
 
-        int livello = (int) Livello.getSelectionModel().getSelectedItem();
-        String tipo = (String) Tipo.getSelectionModel().getSelectedItem();
+        String data = Data.getText();
+        String descrizione = Sede.getText();
 
-        //---------------------------------------------------
+        String prov = (String) NomeVaccino.getSelectionModel().getSelectedItem();
+        String cod = (String) NomeVaccino.getSelectionModel().getSelectedItem();
 
+
+        //new Segnalazioni(codice, paziente, reazioni, data)
+
+        //--------------------------------------
         root = FXMLLoader.load(getClass().getResource("Paziente.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-
     }
+
+
 
     public void indietro (ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("Paziente.fxml"));
@@ -64,7 +69,7 @@ public class ControllerFattoriRischio {
     }
 
     public void initialize(URL url, ResourceBundle resourcebundle){
-        Tipo.setItems(L_Tipi);
-        Livello.getItems().addAll(1, 2, 3, 4, 5);
+        //RischioCombobox.setItems(L_Codici);
+        TipoSomm.getItems().addAll("I", "II", "III", "IV", "Dose Unica");
     }
 }

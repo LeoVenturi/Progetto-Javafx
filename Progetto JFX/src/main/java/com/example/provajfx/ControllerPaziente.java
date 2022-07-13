@@ -24,7 +24,7 @@ public class ControllerPaziente {
     @FXML
     private TextField TextAnno;
     @FXML
-    private ComboBox ProvinciaCombobox;
+    private TextField ProvinciaText;
     @FXML
     private TextField ProfessioneText;
     @FXML
@@ -40,26 +40,24 @@ public class ControllerPaziente {
     private Parent root;
 
     ArrayList<FattoreRischio> ListaFattori = new ArrayList<>();
-
-    private String Provincie[] = {"AG", "AL", "AN", "AO", "AQ", "AR", "AP", "AT",
-            "AV", "BA", "BT", "BL", "BN", "BG", "BI", "BO", "BZ", "BS", "BR", "CA", "CL",
-            "CB", "CI", "CE", "CT", "CZ", "CH", "CO", "CS", "CR", "KR", "CN", "EN", "FM",
-            "FE", "FI", "FG", "FC", "FR", "GE", "GO", "GR", "IM", "IS", "SP", "LT", "LE",
-            "LC", "LI", "LO", "LU", "MC", "MN", "MS", "MT", "VS", "ME", "MI", "MO", "MB",
-            "NA", "NO", "NU", "OG", "OT", "OR", "PD", "PA", "PR", "PV", "PG", "PU", "PE",
-            "PC", "PI", "PT", "PN", "PZ", "PO", "RG", "RA", "RC", "RE", "RI", "RN", "RM",
-            "RO", "SA", "SS", "SV", "SI", "SR", "SO", "TA", "TE", "TR", "TO", "TP", "TN",
-            "TV", "TS", "UD", "VA", "VE", "VB", "VC", "VR", "VV", "VI", "VT"};
-
-    private final ObservableList<String> L_Provincie = FXCollections.observableArrayList(Provincie);
+    ArrayList<Vaccinazioni> ListaVaccini = new ArrayList<>();
 
 
 
     public void invia(ActionEvent event) throws IOException {
-        String anno = TextAnno.getText();
+        int anno= Integer.parseInt(TextAnno.getText());
         String professione = ProfessioneText.getText();
+        String prov = ProvinciaText.getText();
 
-        String prov = (String) ProvinciaCombobox.getSelectionModel().getSelectedItem();
+        new Paziente(anno, prov, professione, ListaFattori, ListaVaccini);
+
+        //ListaFattori = NULL
+
+        root = FXMLLoader.load(getClass().getResource("InterfacciaMedico.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void fattoririschio(ActionEvent event) throws IOException {
@@ -75,16 +73,23 @@ public class ControllerPaziente {
         stage.show();
     }
 
-    public void indietro (ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("InterfacciaMedico.fxml"));
+    public void vaccini(ActionEvent event) throws IOException {
+
+        //ListaFattori.add(new FattoreRischio(a, b, 1));
+
+
+        root = FXMLLoader.load(getClass().getResource("Vaccinazioni.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
 
-
-    public void initialize(URL url, ResourceBundle resourcebundle){
-        ProvinciaCombobox.setItems(L_Provincie);
+    public void indietro (ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("InterfacciaMedico.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 }
