@@ -35,10 +35,7 @@ public class ControllerAccesso {
     @FXML
     private Button AccediButton;
 
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
-    
+    private String pass, nome;
 
     
     
@@ -53,9 +50,17 @@ public class ControllerAccesso {
     private boolean trovaMedico(String nome, String pass) {
     	for(Medico i: listaMedici) {
     		if( i.findMed_Username(nome, pass))
+    	
     			return true;
     	}
     	return false;
+    }
+    protected Medico ritornaMedico() {
+    	for(Medico i: listaMedici) {
+    		if( i.findMed_Username(nome, pass))
+    			return i;
+    	}
+    	return null;
     }
 
 
@@ -69,12 +74,24 @@ public class ControllerAccesso {
         
 
 		if (trovaMedico(user, pass)) {	// fallisce qua, mettendo false va meglio
-			root = FXMLLoader.load(getClass().getResource("InterfacciaMedico.fxml"));
-			stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-	
-			scene = new Scene(root);
-			stage.setScene(scene);
-			stage.show();
+			
+//			FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/second_view.fxml"));
+//            Parent root = (Parent) loader.load();
+//
+//            ControllerInterfacciaMedico secController=loader.getController();
+//            secController.prendiPazienti("sono qua babyes");
+//
+////            Stage stage=new Stage();
+////            stage.setScene(new Scene(root));
+////            stage.show();
+//            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+//            Scene scene = new Scene(root);
+//			 stage.setScene(scene);
+//			stage.show();
+			 
+
+	           
+
 
 		} else {
 			Alert alert = new Alert(AlertType.INFORMATION );
