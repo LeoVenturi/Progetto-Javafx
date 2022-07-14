@@ -73,25 +73,12 @@ public class ControllerAccesso {
         listaMedici.add(m4);
         
 
-		if (trovaMedico(user, pass)) {	// fallisce qua, mettendo false va meglio
-			
-//			FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/second_view.fxml"));
-//            Parent root = (Parent) loader.load();
-//
-//            ControllerInterfacciaMedico secController=loader.getController();
-//            secController.prendiPazienti("sono qua babyes");
-//
-////            Stage stage=new Stage();
-////            stage.setScene(new Scene(root));
-////            stage.show();
-//            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-//            Scene scene = new Scene(root);
-//			 stage.setScene(scene);
-//			stage.show();
-			 
-
-	           
-
+        if (trovaMedico(user, pass)) {	// fallisce qua, mettendo false va meglio
+			Parent root = FXMLLoader.load(getClass().getResource("InterfacciaMedico.fxml"));
+			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			Scene scene = new Scene(root);
+			stage.setScene(scene);
+			stage.show();
 
 		} else {
 			Alert alert = new Alert(AlertType.INFORMATION );
