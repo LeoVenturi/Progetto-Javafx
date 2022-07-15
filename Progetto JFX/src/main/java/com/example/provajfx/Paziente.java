@@ -22,13 +22,7 @@ public class Paziente {
 				"RO", "SA", "SS", "SV", "SI", "SR", "SO", "TA", "TE", "TR", "TO", "TP", "TN",
 				"TV", "TS", "UD", "VA", "VE", "VB", "VC", "VR", "VV", "VI", "VT"};
 		ArrayList<String> Provincie_esistenti = new ArrayList<String>(Arrays.asList(Provincie));
-		//int Paz_Codice[] = {000, 001, 002};
-		//int Paz_AnnoNascita[] = {1999, 2000, 2001};
-		//String Paz_Provincia[] = {"VR", "PD", "VR"};
-		//String Paz_Professione[] = {"Meccanico", "Programmatore", "Studente"};
-		//String Paz_CodiceFattoriRischio[] = {"100", "101", "102"};
-		//int Paz_NReazioni_Avverse[] = {0, 0, 0};
-		//int Paz_NVaccini[] = {1, 2, 3};
+
 
 		public Paziente(int anno, String provincia, String professione, ArrayList<FattoreRischio> fattori_rischio, ArrayList<Vaccinazioni> vaccinazioni) {
 			//aggiunta codice univoco paziente
@@ -72,11 +66,3 @@ public class Paziente {
 
 
 	}
-
-//	public int getPaz_NReazioni_Avverse(int i) {
-//		return Paz_NReazioni_Avverse[i];
-//	}
-
-//	public int getPaz_NVaccini(int i) {
-//		return Paz_NVaccini[i];
-//	}
