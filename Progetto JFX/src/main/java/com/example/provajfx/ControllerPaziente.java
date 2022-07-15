@@ -20,17 +20,36 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class ControllerPaziente {
+public class ControllerPaziente implements Initializable{
     @FXML
     private TextField TextAnno;
     @FXML
     private TextField ProvinciaText;
     @FXML
     private TextField ProfessioneText;
+
+    @FXML
+    private ComboBox <String> Tipo;
+    @FXML
+    private ComboBox Livello;
+    @FXML
+    private TextArea Descrizione;
+
+    @FXML
+    private ComboBox <String> NomeVaccino;
+    @FXML
+    private ComboBox <String> TipoSomm;
+    @FXML
+    private TextField Sede;
+    @FXML
+    private TextField Data;
+
     @FXML
     private Button ButtonInvia;
     @FXML
     private Button ButtonFattoriRischio;
+    @FXML
+    private Button ButtonVaccini;
     @FXML
     private Button BackButton;
 
@@ -38,6 +57,12 @@ public class ControllerPaziente {
     private Stage stage;
     private Scene scene;
     private Parent root;
+
+    private final String[] Tipi = {"Paziente fumatore", "Iperteso", "Sovrappeso", "Paziente fragile per precedenti patologie cardiovascolari/oncologiche"};
+    private final ObservableList<String> L_Tipi = FXCollections.observableArrayList(Tipi);
+
+    private final String[] nomi = {"AstraZeneca", "Pfizer", "Moderna", "Sputnik", "Sinovac", "Antinfluenzale"};
+    private final ObservableList<String> L_Nomi = FXCollections.observableArrayList(nomi);
 
     ArrayList<FattoreRischio> ListaFattori = new ArrayList<>();
     ArrayList<Vaccinazioni> ListaVaccini = new ArrayList<>();
@@ -51,8 +76,6 @@ public class ControllerPaziente {
 
         new Paziente(anno, prov, professione, ListaFattori, ListaVaccini);
 
-        //ListaFattori = NULL
-
         root = FXMLLoader.load(getClass().getResource("InterfacciaMedico.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -60,29 +83,23 @@ public class ControllerPaziente {
         stage.show();
     }
 
-    public void fattoririschio(ActionEvent event) throws IOException {
+    public void fattoririschio(ActionEvent event){
+        String descrizione = Descrizione.getText();
+        int livello = (int) Livello.getSelectionModel().getSelectedItem();
+        String tipo = (String) Tipo.getSelectionModel().getSelectedItem();
 
-
-        //ListaFattori.add(new FattoreRischio(a, b, 1));
-
-
-        root = FXMLLoader.load(getClass().getResource("FattoriRischio.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        ListaFattori.add(new FattoreRischio(tipo, descrizione, livello));
+        System.out.printf("Sono qui 1.");
     }
 
-    public void vaccini(ActionEvent event) throws IOException {
+    public void vaccini(ActionEvent event){
+        String data = Data.getText();
+        String sede = Sede.getText();
+        String nome_vacc = (String) NomeVaccino.getSelectionModel().getSelectedItem();
+        String dose = (String) TipoSomm.getSelectionModel().getSelectedItem();
 
-        //ListaFattori.add(new FattoreRischio(a, b, 1));
-
-
-        root = FXMLLoader.load(getClass().getResource("Vaccinazioni.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        ListaVaccini.add(new Vaccinazioni(nome_vacc, dose, sede, data));
+        System.out.printf("Sono qui 2.");
     }
 
     public void indietro (ActionEvent event) throws IOException {
@@ -91,5 +108,13 @@ public class ControllerPaziente {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void initialize(URL url, ResourceBundle resourcebundle){
+        Tipo.getItems().addAll(L_Tipi);
+        Livello.getItems().addAll(1, 2, 3, 4, 5);
+
+        NomeVaccino.getItems().addAll(L_Nomi);
+        TipoSomm.getItems().addAll("I", "II", "III", "IV", "Dose Unica");
     }
 }
