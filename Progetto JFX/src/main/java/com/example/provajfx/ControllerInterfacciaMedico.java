@@ -42,7 +42,14 @@ public class ControllerInterfacciaMedico {
     
 
     public void paziente (ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("Paziente.fxml"));
+       // root = FXMLLoader.load(getClass().getResource("Paziente.fxml"));
+    	
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource("Paziente.fxml"));
+    	root = loader.load();
+    	
+    	ControllerPaziente ilMedico = loader.getController();
+    	ilMedico.questoMedico(m);
+    	
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
