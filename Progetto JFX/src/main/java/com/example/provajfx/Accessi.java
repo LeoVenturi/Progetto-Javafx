@@ -20,5 +20,10 @@ public abstract class Accessi {
 			return false;
 
 	}
+	public String toString() {
+		for(String i: utenti.keySet())
+			return i;
+		return "";
+	}
 }
 

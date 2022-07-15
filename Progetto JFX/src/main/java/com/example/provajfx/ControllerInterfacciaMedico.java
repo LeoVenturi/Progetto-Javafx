@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ControllerInterfacciaMedico implements Initializable{
+public class ControllerInterfacciaMedico {
 
     @FXML
     private Button SegnalazioneButton;
@@ -24,6 +24,7 @@ public class ControllerInterfacciaMedico implements Initializable{
 
     @FXML
     private Button BackButton;
+    private Medico m;
 
     private Stage stage;
     private Scene scene;
@@ -58,15 +59,9 @@ public class ControllerInterfacciaMedico implements Initializable{
     }
 
 
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		
-	}
-    public String prendiPazienti(String i) {	// qua
-//    	String acc = "";
-//    	for(Paziente paz : i.getPazienti())
-//    		acc += paz.toString();
-    	System.out.println(i );
-    	return null;
+    public void questoMedico(Medico i) {
+    	System.out.println(i.toString());
+    	this.m = i;
     }
+
 }
