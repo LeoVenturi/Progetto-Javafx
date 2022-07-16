@@ -44,12 +44,12 @@ public class ControllerAccesso {
 
     
     
-    private Medico m1 = new Medico("1", "1");
+    private  Medico m1 = new Medico("1", "1");
     private Medico m2 = new Medico("2", "2");
     private Medico m3 = new Medico("3", "3");
     private Medico m4 = new Medico("4", "4");
     
-    private ArrayList<Medico> listaMedici = new ArrayList<>();
+    private static ArrayList<Medico> listaMedici = new ArrayList<>();
     
     
     private boolean trovaMedico(String nome, String pass) {

@@ -91,8 +91,8 @@ public class ControllerPaziente implements Initializable{
         String tipo = (String) Tipo.getSelectionModel().getSelectedItem();
 
         ListaFattori.add(new FattoreRischio(tipo, descrizione, livello));
-        System.out.printf("Sono qui 1.");
-        System.out.print(ListaFattori.size());
+        //System.out.println("Sono qui 1.");
+        //System.out.println(ListaFattori.size());
     }
 
     public void vaccini(ActionEvent event){
@@ -102,8 +102,8 @@ public class ControllerPaziente implements Initializable{
         String dose = (String) TipoSomm.getSelectionModel().getSelectedItem();
 
         ListaVaccini.add(new Vaccinazioni(nome_vacc, dose, sede, data));
-        System.out.print("Sono qui 2.");
-        System.out.print(ListaVaccini.size());
+       // System.out.println("Sono qui 2.");
+        //System.out.println(ListaVaccini.size());
     }
 
     public void indietro (ActionEvent event) throws IOException {
