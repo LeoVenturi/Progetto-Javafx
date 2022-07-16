@@ -54,7 +54,6 @@ public class ControllerSegnalazione implements Initializable{ // aggiunge sia se
 
         //new Segnalazioni();
 
-        //--------------------------------------
         root = FXMLLoader.load(getClass().getResource("InterfacciaMedico.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
