@@ -24,7 +24,7 @@ public class ControllerInterfacciaMedico {
 
     @FXML
     private Button BackButton;
-    static Medico m;
+    private static Medico m;
 
     private Stage stage;
     private Scene scene;

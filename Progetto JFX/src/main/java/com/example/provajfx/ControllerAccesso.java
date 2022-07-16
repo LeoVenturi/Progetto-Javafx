@@ -44,12 +44,14 @@ public class ControllerAccesso {
 
     
     
-    private  Medico m1 = new Medico("1", "1");
+    private Medico m1 = new Medico("5", "5");
     private Medico m2 = new Medico("2", "2");
     private Medico m3 = new Medico("3", "3");
     private Medico m4 = new Medico("4", "4");
+    private Farmacologo f1 = new Farmacologo("1", "1");
     
     private static ArrayList<Medico> listaMedici = new ArrayList<>();
+    private static ArrayList<Farmacologo> listaFarmacologo = new ArrayList<>();
     
     
     private boolean trovaMedico(String nome, String pass) {
@@ -60,8 +62,25 @@ public class ControllerAccesso {
     	}
     	return false;
     }
+    
+    private boolean trovaFarmacologo(String nome, String pass) {
+    	for(Farmacologo i: listaFarmacologo) {
+    		if( i.findMed_Username(nome, pass))
+    	
+    			return true;
+    	}
+    	return false;
+    }
+    
     protected Medico ritornaMedico(String user, String pass) {
     	for(Medico i: listaMedici) {
+    		if( i.findMed_Username(user, pass))
+    			return i;
+    	}
+    	return null;
+    }
+    protected Farmacologo ritornaFarmacologo(String user, String pass) {
+    	for(Farmacologo i: listaFarmacologo) {
     		if( i.findMed_Username(user, pass))
     			return i;
     	}
@@ -77,6 +96,10 @@ public class ControllerAccesso {
         listaMedici.add(m3);
         listaMedici.add(m4);
         
+        listaFarmacologo.add(f1);
+        
+        f1.prendiMedici(listaMedici);
+        
 
         if (trovaMedico(user, pass)) {	// fallisce qua, mettendo false va meglio
 			//Parent root = FXMLLoader.load(getClass().getResource("InterfacciaMedico.fxml"));
@@ -91,7 +114,22 @@ public class ControllerAccesso {
 			stage.setScene(scene);
 			stage.show();
 
-		} else {
+		} else if(trovaFarmacologo(user, pass)){
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("InterfaceFarmacologo.fxml"));
+        	root = loader.load();
+        	
+        	ControllerInterfaceFarmacologo ilFarmacologo = loader.getController();
+        	
+        	Farmacologo f2 = ritornaFarmacologo(user,pass);
+        	
+        	ilFarmacologo.questoFarmacologo(f2);
+        	
+        	Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			Scene scene = new Scene(root);
+			stage.setScene(scene);
+			stage.show();
+			
+		}else{
 			Alert alert = new Alert(AlertType.INFORMATION );
 			alert.setTitle("Informazione");
 			alert.setHeaderText("La password o username incorretti");

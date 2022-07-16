@@ -17,10 +17,12 @@ public class Farmacologo extends Accessi{
 	private Map<String, Integer> num_segnalazioni_sede = new HashMap<>();
 	private int segnalazioni_gravi_tot = 0;
 	
-	public Farmacologo(String pass, String nomeUtente, ArrayList<Medico> medici) {
+	public Farmacologo(String pass, String nomeUtente) {
 		super(pass, nomeUtente);
-		this.medici = medici;
 		
+	}
+	public void prendiMedici(ArrayList<Medico> l1) {
+		this.medici = l1;
 	}
 	
 
