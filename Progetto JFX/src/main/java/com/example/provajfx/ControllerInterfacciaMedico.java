@@ -33,8 +33,14 @@ public class ControllerInterfacciaMedico {
     //Medico medico1= getMedico();
 
     public void segnalazione (ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("Segnalazione.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        //root = FXMLLoader.load(getClass().getResource("Segnalazione.fxml"));
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource("Segnalazione.fxml"));
+    	root = loader.load();
+    	
+    	ControllerSegnalazione ilMedico = loader.getController();
+    	ilMedico.questoMedico(m);
+    	
+    	stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
@@ -67,7 +73,6 @@ public class ControllerInterfacciaMedico {
 
 
     public void questoMedico(Medico i) {
-    	System.out.println(i.toString());
     	this.m = i;
     }
 

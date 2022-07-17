@@ -38,18 +38,27 @@ public class ControllerSegnalazione implements Initializable{ // aggiunge sia se
     private Stage stage;
     private Scene scene;
     private Parent root;
+    private static Medico medico;
 
-    private final String[] codici = {};
+    private  String[] codici = {};
     private final ObservableList<String> L_Codici = FXCollections.observableArrayList(codici);
 
-
+    private void ritornaPazienti() {
+    	codici = medico.getPazienti().toArray(new String[0]);
+    }
+    
     public void invia(ActionEvent event) throws IOException {
 
         String data = DataTextfield.getText();
         String descrizione = DescrizioneTextarea.getText();
+        
+        ritornaPazienti();				// riempie 
+        for(int i = 0; i < codici.length; i++) {
+        	System.out.println(codici[i]);
+        }
 
         int grav = (int) RischioCombobox.getSelectionModel().getSelectedItem();
-        //int cod = (int) PazienteCombobox.getSelectionModel().getSelectedItem();
+        int cod = (int) PazienteCombobox.getSelectionModel().getSelectedItem();
 
 
         //new Segnalazioni();
@@ -70,7 +79,10 @@ public class ControllerSegnalazione implements Initializable{ // aggiunge sia se
     }
 
     public void initialize(URL url, ResourceBundle resourcebundle){
-        //RischioCombobox.setItems(L_Codici);
+    	RischioCombobox.setItems(L_Codici);
         RischioCombobox.getItems().addAll(1, 2, 3, 4, 5);
+    }
+    public void questoMedico(Medico m) {	// si tira dietro il medico dal login
+    	this.medico = m;
     }
 }

@@ -16,12 +16,12 @@ public class Medico extends Accessi {
 		
 	}
 
-	public String toString(){
-		String acc = "";
-		for(Paziente paziente: lista_pazienti)
-			acc += paziente.toString() + "\n";
-		return acc;
-	}
+//	public String toString(){
+//		String acc = "";
+//		for(Paziente paziente: lista_pazienti)
+//			acc += paziente.toString() + "\n";
+//		return acc;
+//	}
 
 	public ArrayList<Paziente> getPazienti(){
 		return this.lista_pazienti;

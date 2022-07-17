@@ -57,7 +57,7 @@ public class ControllerPaziente implements Initializable{
     private Stage stage;
     private Scene scene;
     private Parent root;
-    private Medico medico;
+    private static Medico medico;
 
     private final String[] Tipi = {"Paziente fumatore", "Iperteso", "Sovrappeso", "Paziente fragile per precedenti patologie cardiovascolari/oncologiche"};
     private final ObservableList<String> L_Tipi = FXCollections.observableArrayList(Tipi);
@@ -93,6 +93,8 @@ public class ControllerPaziente implements Initializable{
         ListaFattori.add(new FattoreRischio(tipo, descrizione, livello));
         //System.out.println("Sono qui 1.");
         //System.out.println(ListaFattori.size());
+        Livello.getSelectionModel().select("vuoto");
+        Tipo.getSelectionModel().select("vuoto");
     }
 
     public void vaccini(ActionEvent event){
@@ -104,6 +106,8 @@ public class ControllerPaziente implements Initializable{
         ListaVaccini.add(new Vaccinazioni(nome_vacc, dose, sede, data));
        // System.out.println("Sono qui 2.");
         //System.out.println(ListaVaccini.size());
+        NomeVaccino.getSelectionModel().select("vuoto");
+        TipoSomm.getSelectionModel().select("vuoto");
     }
 
     public void indietro (ActionEvent event) throws IOException {
@@ -122,6 +126,7 @@ public class ControllerPaziente implements Initializable{
         TipoSomm.getItems().addAll("I", "II", "III", "IV", "Dose Unica");
     }
     public void questoMedico(Medico m) {	// si tira dietro il medico dal login
+    	System.out.println(m.toString());
     	this.medico = m;
     }
 }
