@@ -61,22 +61,20 @@ public class ControllerInterfaceFarmacologo implements Initializable {
     private Scene scene;
     private Parent root;
 
+    int i = 1;
+    int a = 1;
+
 
     public void visto (ActionEvent event) throws IOException {
-        //LimSegn.isShowing
+        LimSegn.setVisible(false);
+        Visto.setVisible(false);
     }
 
     public void segn_vacc (ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("FaSeganlazioniVaccino.fxml"));
         Parent root = loader.load();
-
         ControllerFaSeganlazioniVaccino scene2Controller = loader.getController();
         scene2Controller.displayName("---");
-
-        /*stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();*/
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();
@@ -85,14 +83,8 @@ public class ControllerInterfaceFarmacologo implements Initializable {
     public void segn_grav (ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("FaSegnalazioniGravi.fxml"));
         Parent root = loader.load();
-
         ControllerFaSegnalazioniGravi scene2Controller = loader.getController();
         scene2Controller.displayName("---");
-
-        /*stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();*/
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();
@@ -102,14 +94,8 @@ public class ControllerInterfaceFarmacologo implements Initializable {
     public void segn_prov (ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("FaSegnalazioniProv.fxml"));
         Parent root = loader.load();
-
         ControllerFaSegnalazioniProv scene2Controller = loader.getController();
         scene2Controller.displayName("---");
-
-        /*stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();*/
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();
@@ -117,20 +103,16 @@ public class ControllerInterfaceFarmacologo implements Initializable {
     public void segn_sede (ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("FaSeganlazioniSede.fxml"));
         Parent root = loader.load();
-
         ControllerFaSeganlazioniSede scene2Controller = loader.getController();
         scene2Controller.displayName("---");
-
-        /*stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();*/
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();
     }
-    public void prop (ActionEvent event) throws IOException {
 
+    public void prop (ActionEvent event) throws IOException {
+        PropVacc.setVisible(false);
+        Prop.setVisible(false);
     }
 
     public void indietro (ActionEvent event) throws IOException {
@@ -151,5 +133,23 @@ public class ControllerInterfaceFarmacologo implements Initializable {
         colVacc.setCellValueFactory(new PropertyValueFactory<>("colMed"));
 
         //Tabella.setItems();
+
+        if (i == 0){
+            LimSegn.setVisible(false);
+            Visto.setVisible(false);
+        }
+        else{
+            LimSegn.setVisible(true);
+            Visto.setVisible(true);
+        }
+
+        if (a == 0){
+            PropVacc.setVisible(false);
+            Prop.setVisible(false);
+        }
+        else{
+            PropVacc.setVisible(true);
+            Prop.setVisible(true);
+        }
     }
 }

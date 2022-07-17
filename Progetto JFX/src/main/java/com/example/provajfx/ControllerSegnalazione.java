@@ -39,7 +39,7 @@ public class ControllerSegnalazione implements Initializable{ // aggiunge sia se
     private Scene scene;
     private Parent root;
 
-    private final String[] codici = {};
+    private String[] codici = {};
     private final ObservableList<String> L_Codici = FXCollections.observableArrayList(codici);
 
 

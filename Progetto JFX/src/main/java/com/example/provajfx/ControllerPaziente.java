@@ -27,6 +27,12 @@ public class ControllerPaziente implements Initializable{
     private TextField ProvinciaText;
     @FXML
     private TextField ProfessioneText;
+    @FXML
+    private TextField DataTextfield;
+    @FXML
+    private ComboBox RischioCombobox;
+    @FXML
+    private TextArea DescrizioneTextarea;
 
     @FXML
     private ComboBox <String> Tipo;
@@ -42,7 +48,7 @@ public class ControllerPaziente implements Initializable{
     @FXML
     private TextField Sede;
     @FXML
-    private TextField Data;
+    private TextField DataV;
 
     @FXML
     private Button ButtonInvia;
@@ -74,6 +80,11 @@ public class ControllerPaziente implements Initializable{
         String professione = ProfessioneText.getText();
         String prov = ProvinciaText.getText();
 
+        String data = DataTextfield.getText();
+        String descrizione = DescrizioneTextarea.getText();
+
+        int grav = (int) RischioCombobox.getSelectionModel().getSelectedItem();
+
         new Paziente(anno, prov, professione, ListaFattori, ListaVaccini);
 
         root = FXMLLoader.load(getClass().getResource("InterfacciaMedico.fxml"));
@@ -93,7 +104,7 @@ public class ControllerPaziente implements Initializable{
     }
 
     public void vaccini(ActionEvent event){
-        String data = Data.getText();
+        String data = DataV.getText();
         String sede = Sede.getText();
         String nome_vacc = (String) NomeVaccino.getSelectionModel().getSelectedItem();
         String dose = (String) TipoSomm.getSelectionModel().getSelectedItem();
@@ -116,5 +127,7 @@ public class ControllerPaziente implements Initializable{
 
         NomeVaccino.getItems().addAll(L_Nomi);
         TipoSomm.getItems().addAll("I", "II", "III", "IV", "Dose Unica");
+
+        RischioCombobox.getItems().addAll(1, 2, 3, 4, 5);
     }
 }

@@ -63,7 +63,7 @@ public class ControllerAccesso {
         
 
 		if (trovaMedico(user, pass)) {	// fallisce qua, mettendo false va meglio
-			root = FXMLLoader.load(getClass().getResource("InterfacciaMedico.fxml"));
+			root = FXMLLoader.load(getClass().getResource("InterfacciaMedico.fxml"));//InterfacciaMedico InterfaceFarmacologo
 			stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			scene = new Scene(root);
 			stage.setScene(scene);

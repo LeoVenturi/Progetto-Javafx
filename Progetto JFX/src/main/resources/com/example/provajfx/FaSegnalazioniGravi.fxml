@@ -4,10 +4,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.provajfx.ControllerFaSegnalazioniGravi">
    <children>
-      <Label layoutX="210.0" layoutY="183.0" prefHeight="35.0" prefWidth="181.0" text="Label">
+      <Label fx:id="nameLabel" layoutX="210.0" layoutY="183.0" prefHeight="35.0" prefWidth="181.0" text="Label">
          <font>
             <Font size="24.0" />
          </font>
