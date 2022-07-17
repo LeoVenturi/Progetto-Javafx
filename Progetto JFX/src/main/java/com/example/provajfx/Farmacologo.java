@@ -42,10 +42,12 @@ public class Farmacologo extends Accessi{
 				ArrayList<Vaccinazioni> vaccini = new ArrayList<>();
 				vaccini = paziente.getVaccino();
 				for(Vaccinazioni vaccino: vaccini) {
-					Segnalazioni segnalazione = vaccino.getSegnalazione();
-					ReazioneAvversa reazione = segnalazione.getReazione();
-					if(reazione.getLivello() == 5 || reazione.getLivello() == 4 || reazione.getLivello() == 3)
-						segnalazioni_gravi_tot ++;
+					if(vaccino.getSegnalazione() != null) {
+						Segnalazioni segnalazione = vaccino.getSegnalazione();
+						ReazioneAvversa reazione = segnalazione.getReazione();
+						if(reazione.getLivello() == 5 || reazione.getLivello() == 4 || reazione.getLivello() == 3)
+							segnalazioni_gravi_tot ++;
+					}
 				}
 			}
 		}
@@ -63,15 +65,17 @@ public class Farmacologo extends Accessi{
 				vaccini = paziente.getVaccino();
 				for(Vaccinazioni vaccino: vaccini) {
 					String vax = vaccino.getVaccino();
-					Segnalazioni segnalazione = vaccino.getSegnalazione();
-					ReazioneAvversa reazione = segnalazione.getReazione();
-					if(num_segnalazioni.containsKey(vax)) {
+					if(vaccino.getSegnalazione() != null) {
+						Segnalazioni segnalazione = vaccino.getSegnalazione();
+						ReazioneAvversa reazione = segnalazione.getReazione();
+						if(num_segnalazioni.containsKey(vax)) {
 						int num = num_segnalazioni.get(vax);
 						num ++;
 						num_segnalazioni.put(vax, num);
-					}
-					else
-						num_segnalazioni.put(vax, 1);
+						}
+						else
+							num_segnalazioni.put(vax, 1);
+					}	
 				}
 			}
 		}
@@ -90,16 +94,19 @@ public class Farmacologo extends Accessi{
 				vaccini = paziente.getVaccino();
 				for(Vaccinazioni vaccino: vaccini) {
 					String vax = vaccino.getVaccino();
-					Segnalazioni segnalazione = vaccino.getSegnalazione();
-					ReazioneAvversa reazione = segnalazione.getReazione();
+					if(vaccino.getSegnalazione() != null) {
+						Segnalazioni segnalazione = vaccino.getSegnalazione();
+						ReazioneAvversa reazione = segnalazione.getReazione();
 					
-					if(num_segnalazioni_sede.containsKey(vaccino.getSede())) {
-						int num = num_segnalazioni_sede.get(vaccino.getSede());
-						num ++;
-						num_segnalazioni_sede.put(vaccino.getSede(), num);
+						if(num_segnalazioni_sede.containsKey(vaccino.getSede())) {
+							int num = num_segnalazioni_sede.get(vaccino.getSede());
+							num ++;
+							num_segnalazioni_sede.put(vaccino.getSede(), num);
+						}
+						else
+							num_segnalazioni_sede.put(vaccino.getSede(), 1);
+				
 					}
-					else
-						num_segnalazioni_sede.put(vaccino.getSede(), 1);
 				}
 			}
 		}
@@ -120,18 +127,21 @@ public class Farmacologo extends Accessi{
 				vaccini = paziente.getVaccino();
 				for(Vaccinazioni vaccino: vaccini) {
 					String vax = vaccino.getVaccino();
-					Segnalazioni segnalazione = vaccino.getSegnalazione();
-					ReazioneAvversa reazione = segnalazione.getReazione();
+					if(vaccino.getSegnalazione() != null) {
+						Segnalazioni segnalazione = vaccino.getSegnalazione();
+						ReazioneAvversa reazione = segnalazione.getReazione();
 						
-				}									
-				if(num_segnalazioni_provincia.containsKey(paziente.getProvincia())) {
-					int num = num_segnalazioni_provincia.get(paziente.getProvincia());
-					num ++;
-					num_segnalazioni_provincia.put(paziente.getProvincia(), num);
-				}
-				else
-					num_segnalazioni_provincia.put(paziente.getProvincia(), 1);
+														
+						if(num_segnalazioni_provincia.containsKey(paziente.getProvincia())) {
+							int num = num_segnalazioni_provincia.get(paziente.getProvincia());
+							num ++;
+							num_segnalazioni_provincia.put(paziente.getProvincia(), num);
+						}
+						else
+							num_segnalazioni_provincia.put(paziente.getProvincia(), 1);
+					}
 					
+				}
 			}
 		}
 		for(String provincia: num_segnalazioni_provincia.keySet())
