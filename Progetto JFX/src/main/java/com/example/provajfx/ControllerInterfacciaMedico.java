@@ -35,10 +35,12 @@ public class ControllerInterfacciaMedico {
     public void segnalazione (ActionEvent event) throws IOException {
         //root = FXMLLoader.load(getClass().getResource("Segnalazione.fxml"));
     	FXMLLoader loader = new FXMLLoader(getClass().getResource("Segnalazione.fxml"));
+    	
     	root = loader.load();
     	
     	ControllerSegnalazione ilMedico = loader.getController();
-    	ilMedico.questoMedico(m);
+    	ilMedico.MandaMedico(m);
+    	
     	
     	stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);

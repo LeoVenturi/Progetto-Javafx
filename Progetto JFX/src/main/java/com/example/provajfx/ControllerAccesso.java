@@ -112,11 +112,18 @@ public class ControllerAccesso {
 
         if (trovaMedico(user, pass)) {	// fallisce qua, mettendo false va meglio
 			//Parent root = FXMLLoader.load(getClass().getResource("InterfacciaMedico.fxml"));
+//        	FXMLLoader loader1 = new FXMLLoader(getClass().getResource("Segnalazione.fxml"));
+//        	root = loader1.load();
+        	
         	FXMLLoader loader = new FXMLLoader(getClass().getResource("InterfacciaMedico.fxml"));
         	root = loader.load();
         	
+//        	ControllerSegnalazione questoMedico = loader1.getController();
+//        	questoMedico.MandaMedico(ritornaMedico(user,pass));
+        	
         	ControllerInterfacciaMedico ilMedico = loader.getController();
         	ilMedico.questoMedico(ritornaMedico(user,pass));
+        	
         	
         	Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			Scene scene = new Scene(root);

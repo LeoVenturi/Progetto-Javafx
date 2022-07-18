@@ -41,9 +41,9 @@ public class ControllerSegnalazione implements Initializable{ // aggiunge sia se
     private Parent root;
     private static Medico medico;
 
-    private  String[] codici;
-    //private ArrayList<String> codici = new ArrayList<>();
-    private final ObservableList<String> L_Codici = FXCollections.observableArrayList(codici);
+    //private  String[] codici = {};
+    private ArrayList<String> codici = new ArrayList<>();
+   
 
 //    private void ritornaPazienti() {
 //    	codici = medico.getPazienti().toArray(new String[0]);
@@ -53,17 +53,15 @@ public class ControllerSegnalazione implements Initializable{ // aggiunge sia se
 
         String data = DataTextfield.getText();
         String descrizione = DescrizioneTextarea.getText();
-        codici = new String[medico.getPazienti().size()];
+        //codici = new String[medico.getPazienti().size()];
+        
         
        // ritornaPazienti();				// riempie 
 //        System.out.println("sono qua ------------------------->");
 //        for(int i = 0; i < codici.length; i++) {
 //        	System.out.println(codici[i] + "\n------------------------");
 //        }
-//        for(Paziente i: medico.getPazienti()) {
-//        	codici.add(String.valueOf(i.getCodice()));
-//        	System.out.println("sono quallll ---->" + String.valueOf(i.getCodice()));
-//        }
+        
 
         int grav = (int) RischioCombobox.getSelectionModel().getSelectedItem();	
         int cod = (int) PazienteCombobox.getSelectionModel().getSelectedItem();
@@ -85,12 +83,23 @@ public class ControllerSegnalazione implements Initializable{ // aggiunge sia se
         stage.setScene(scene);
         stage.show();
     }
-
+    @Override
     public void initialize(URL url, ResourceBundle resourcebundle){
+//    	for(Paziente i: medico.getPazienti()) {
+//        	codici.add(String.valueOf(i.getCodice()));
+//        	System.out.println("sono quallll ---->" + String.valueOf(i.getCodice()));
+//        }
+    	codici.add("Primo");
+    	System.out.println("metodo inizialize ->>>>>>>>>>>>>>>>><");
+    	
+    	ObservableList<String> L_Codici = FXCollections.observableArrayList(codici);
     	PazienteCombobox.setItems(L_Codici);
         RischioCombobox.getItems().addAll(1, 2, 3, 4, 5);
     }
-    public void questoMedico(Medico m) {	// si tira dietro il medico dal login
+    public void MandaMedico(Medico m) {	// si tira dietro il medico dal login
+    	System.out.println("sono in segnalazioni ->>>>" + m.toString());
     	this.medico = m;
     }
+
+	
 }
