@@ -49,6 +49,11 @@ public class ControllerAccesso {
     private Medico m3 = new Medico("3", "3");
     private Medico m4 = new Medico("4", "4");
     private Farmacologo f1 = new Farmacologo("1", "1");
+    private FattoreRischio f = new FattoreRischio("a caso", "A caso", 3);
+    private Vaccinazioni v1 = new Vaccinazioni("AstraZeneca", "III", "Roma", "4");
+    private ArrayList<FattoreRischio> listaFattori = new ArrayList<FattoreRischio>();
+    private ArrayList<Vaccinazioni> listaVaccini = new ArrayList<Vaccinazioni>();
+    private Paziente p1 = new Paziente(2, "VR", "alex",listaFattori ,listaVaccini);
     
     private static ArrayList<Medico> listaMedici = new ArrayList<>();
     private static ArrayList<Farmacologo> listaFarmacologo = new ArrayList<>();
@@ -91,10 +96,14 @@ public class ControllerAccesso {
     public void accedi(ActionEvent event) throws IOException{
         String user = UsenameTextfield.getText();
         String pass = PasswordTextfield.getText();
+        m2.aggiungiPaziente(p1);
         listaMedici.add(m1);
         listaMedici.add(m2);
         listaMedici.add(m3);
         listaMedici.add(m4);
+        
+        listaVaccini.add(v1);
+        listaFattori.add(f);
         
         listaFarmacologo.add(f1);
         
