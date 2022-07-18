@@ -60,6 +60,7 @@ public class ControllerInterfaceFarmacologo implements Initializable {
     private Stage stage;
     private Scene scene;
     private Parent root;
+    private static Farmacologo f;
 
 
     public void visto (ActionEvent event) throws IOException {
@@ -67,19 +68,21 @@ public class ControllerInterfaceFarmacologo implements Initializable {
     }
 
     public void segn_vacc (ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("FaSeganlazioniVaccino.fxml"));
-        Parent root = loader.load();
-
-        ControllerFaSeganlazioniVaccino scene2Controller = loader.getController();
-        scene2Controller.displayName("---");
-
-        /*stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();*/
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.show();
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource("FaSeganlazioniVaccino.fxml"));
+//        Parent root = loader.load();
+//
+//        ControllerFaSeganlazioniVaccino scene2Controller = loader.getController();
+//        scene2Controller.displayName("---");
+//
+//        /*stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+//        scene = new Scene(root);
+//        stage.setScene(scene);
+//        stage.show();*/
+//        Stage stage = new Stage();
+//        stage.setScene(new Scene(root));
+//        stage.show();
+    	
+    	System.out.println(f.toString());
     }
 
     public void segn_grav (ActionEvent event) throws IOException {
@@ -151,5 +154,9 @@ public class ControllerInterfaceFarmacologo implements Initializable {
         colVacc.setCellValueFactory(new PropertyValueFactory<>("colMed"));
 
         //Tabella.setItems();
+    }
+    public void questoFarmacologo(Farmacologo i) {
+    	System.out.println(i.toString());
+    	this.f = i;
     }
 }

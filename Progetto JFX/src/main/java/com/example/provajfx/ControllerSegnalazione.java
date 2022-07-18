@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 
@@ -38,18 +39,34 @@ public class ControllerSegnalazione implements Initializable{ // aggiunge sia se
     private Stage stage;
     private Scene scene;
     private Parent root;
+    private static Medico medico;
 
-    private final String[] codici = {};
+    private  String[] codici;
+    //private ArrayList<String> codici = new ArrayList<>();
     private final ObservableList<String> L_Codici = FXCollections.observableArrayList(codici);
 
-
+//    private void ritornaPazienti() {
+//    	codici = medico.getPazienti().toArray(new String[0]);
+//    }
+    
     public void invia(ActionEvent event) throws IOException {
 
         String data = DataTextfield.getText();
         String descrizione = DescrizioneTextarea.getText();
+        codici = new String[medico.getPazienti().size()];
+        
+       // ritornaPazienti();				// riempie 
+//        System.out.println("sono qua ------------------------->");
+//        for(int i = 0; i < codici.length; i++) {
+//        	System.out.println(codici[i] + "\n------------------------");
+//        }
+//        for(Paziente i: medico.getPazienti()) {
+//        	codici.add(String.valueOf(i.getCodice()));
+//        	System.out.println("sono quallll ---->" + String.valueOf(i.getCodice()));
+//        }
 
-        int grav = (int) RischioCombobox.getSelectionModel().getSelectedItem();
-        //int cod = (int) PazienteCombobox.getSelectionModel().getSelectedItem();
+        int grav = (int) RischioCombobox.getSelectionModel().getSelectedItem();	
+        int cod = (int) PazienteCombobox.getSelectionModel().getSelectedItem();
 
 
         //new Segnalazioni();
@@ -70,7 +87,10 @@ public class ControllerSegnalazione implements Initializable{ // aggiunge sia se
     }
 
     public void initialize(URL url, ResourceBundle resourcebundle){
-        //RischioCombobox.setItems(L_Codici);
+    	PazienteCombobox.setItems(L_Codici);
         RischioCombobox.getItems().addAll(1, 2, 3, 4, 5);
+    }
+    public void questoMedico(Medico m) {	// si tira dietro il medico dal login
+    	this.medico = m;
     }
 }

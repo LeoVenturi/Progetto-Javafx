@@ -57,6 +57,7 @@ public class ControllerPaziente implements Initializable{
     private Stage stage;
     private Scene scene;
     private Parent root;
+    private static Medico medico;
 
     private final String[] Tipi = {"Paziente fumatore", "Iperteso", "Sovrappeso", "Paziente fragile per precedenti patologie cardiovascolari/oncologiche"};
     private final ObservableList<String> L_Tipi = FXCollections.observableArrayList(Tipi);
@@ -64,8 +65,8 @@ public class ControllerPaziente implements Initializable{
     private final String[] nomi = {"AstraZeneca", "Pfizer", "Moderna", "Sputnik", "Sinovac", "Antinfluenzale"};
     private final ObservableList<String> L_Nomi = FXCollections.observableArrayList(nomi);
 
-    ArrayList<FattoreRischio> ListaFattori = new ArrayList<>();
-    ArrayList<Vaccinazioni> ListaVaccini = new ArrayList<>();
+    private ArrayList<FattoreRischio> ListaFattori = new ArrayList<>();
+    private ArrayList<Vaccinazioni> ListaVaccini = new ArrayList<>();
 
 
 
@@ -74,8 +75,9 @@ public class ControllerPaziente implements Initializable{
         String professione = ProfessioneText.getText();
         String prov = ProvinciaText.getText();
 
-        new Paziente(anno, prov, professione, ListaFattori, ListaVaccini);
-
+        medico.aggiungiPaziente(new Paziente(anno, prov, professione, ListaFattori, ListaVaccini));
+        for(Paziente i: medico.getPazienti())
+        	System.out.println("lista dei pazienti -> "+ i.toString());
         root = FXMLLoader.load(getClass().getResource("InterfacciaMedico.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -89,7 +91,10 @@ public class ControllerPaziente implements Initializable{
         String tipo = (String) Tipo.getSelectionModel().getSelectedItem();
 
         ListaFattori.add(new FattoreRischio(tipo, descrizione, livello));
-        System.out.printf("Sono qui 1.");
+        //System.out.println("Sono qui 1.");
+        //System.out.println(ListaFattori.size());
+        Livello.getSelectionModel().select("vuoto");
+        Tipo.getSelectionModel().select("vuoto");
     }
 
     public void vaccini(ActionEvent event){
@@ -99,7 +104,10 @@ public class ControllerPaziente implements Initializable{
         String dose = (String) TipoSomm.getSelectionModel().getSelectedItem();
 
         ListaVaccini.add(new Vaccinazioni(nome_vacc, dose, sede, data));
-        System.out.printf("Sono qui 2.");
+       // System.out.println("Sono qui 2.");
+        //System.out.println(ListaVaccini.size());
+        NomeVaccino.getSelectionModel().select("vuoto");
+        TipoSomm.getSelectionModel().select("vuoto");
     }
 
     public void indietro (ActionEvent event) throws IOException {
@@ -116,5 +124,9 @@ public class ControllerPaziente implements Initializable{
 
         NomeVaccino.getItems().addAll(L_Nomi);
         TipoSomm.getItems().addAll("I", "II", "III", "IV", "Dose Unica");
+    }
+    public void questoMedico(Medico m) {	// si tira dietro il medico dal login
+    	System.out.println(m.toString());
+    	this.medico = m;
     }
 }

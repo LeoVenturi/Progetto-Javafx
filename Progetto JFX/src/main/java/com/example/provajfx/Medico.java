@@ -16,12 +16,12 @@ public class Medico extends Accessi {
 		
 	}
 
-	public String returnPass(){
-		String acc = "";
-		for(Paziente paziente: lista_pazienti)
-			acc += paziente.toString() + "\n";
-		return acc;
-	}
+//	public String toString(){
+//		String acc = "";
+//		for(Paziente paziente: lista_pazienti)
+//			acc += paziente.toString() + "\n";
+//		return acc;
+//	}
 
 	public ArrayList<Paziente> getPazienti(){
 		return this.lista_pazienti;
@@ -29,6 +29,10 @@ public class Medico extends Accessi {
 	
 	public void addSegnalazione(Segnalazioni segnalazione) {
 		this.segnalazioni.add(segnalazione);
+	}
+	public void aggiungiPaziente( Paziente paziente) {
+		this.lista_pazienti.add(paziente);
+		this.toString();
 	}
 	
 	

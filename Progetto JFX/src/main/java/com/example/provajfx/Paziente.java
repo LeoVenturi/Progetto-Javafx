@@ -60,7 +60,14 @@ public class Paziente {
 			return this.provincia;
 		}
 
-		public int getCodice() {return this.codice;}
+		public int getCodice() {
+			return this.codice;
+		}
+		
+		public String toString() {
+			
+			return this.codice +", " +this.professione;
+		}
 		
 		
 
