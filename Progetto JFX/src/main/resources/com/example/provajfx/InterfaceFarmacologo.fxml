@@ -5,27 +5,34 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="527.0" prefWidth="728.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.provajfx.ControllerInterfaceFarmacologo">
-   <children>
-      <Label fx:id="LimSegn" layoutX="14.0" prefHeight="49.0" prefWidth="124.0" text="Segnale segnalazioni" />
-      <Label fx:id="PropVacc" layoutX="361.0" layoutY="18.0" text="Segnale vaccino" />
-      <Button fx:id="Prop" layoutX="476.0" layoutY="14.0" mnemonicParsing="false" onAction="#prop" text="Proponi controllo Vaccino" />
-      <TableView fx:id="Tabella" layoutX="14.0" layoutY="49.0" prefHeight="356.0" prefWidth="657.0">
-        <columns>
-          <TableColumn fx:id="colMed" prefWidth="110.0" text="Medico" />
-          <TableColumn fx:id="colPaz" prefWidth="110.0" text="Paziente" />
-            <TableColumn fx:id="colRez" prefWidth="110.0" text="Reazione Avversa" />
-            <TableColumn fx:id="colDataRa" prefWidth="110.0" text="Data R.A." />
-            <TableColumn fx:id="colDataS" prefWidth="110.0" text="Data Segn." />
-            <TableColumn fx:id="colVacc" prefWidth="110.0" text="Vaccinazioni" />
-        </columns>
-      </TableView>
-      <Button fx:id="SegnVacc" layoutX="24.0" layoutY="431.0" mnemonicParsing="false" onAction="#segn_vacc" prefHeight="25.0" prefWidth="216.0" text="Segnalazioni per vaccino" />
-      <Button fx:id="SegnSede" layoutX="260.0" layoutY="465.0" mnemonicParsing="false" onAction="#segn_sede" text="Segnalazioni per sede di vaccinazione" />
-      <Button fx:id="SegnProv" layoutX="260.0" layoutY="431.0" mnemonicParsing="false" onAction="#segn_prov" prefHeight="25.0" prefWidth="216.0" text="Segnalazioni per provincia" />
-      <Button fx:id="SegnGrav" layoutX="24.0" layoutY="465.0" mnemonicParsing="false" onAction="#segn_grav" prefHeight="25.0" prefWidth="216.0" text="Segnalazioni gravi in settimana" />
-      <Button fx:id="BackButton" layoutX="553.0" layoutY="427.0" mnemonicParsing="false" onAction="#indietro" prefHeight="59.0" prefWidth="93.0" text="Indietro" />
-      <Button fx:id="Visto" layoutX="160.0" layoutY="14.0" mnemonicParsing="false" onAction="#visto" text="Visto" />
-   </children>
+    <children>
+        <Label fx:id="LimSegn" layoutX="14.0" prefHeight="49.0" prefWidth="174.0" text="Avviso Segnalazioni" textFill="RED">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font></Label>
+        <Label fx:id="PropVacc" layoutX="325.0" layoutY="13.0" text="Seganlazioni Gravi Vaccino" textFill="RED">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font></Label>
+        <Button fx:id="Prop" layoutX="560.0" layoutY="14.0" mnemonicParsing="false" onAction="#prop" text="Proponi controllo Vaccino" />
+        <TableView fx:id="Tabella" layoutX="14.0" layoutY="49.0" prefHeight="356.0" prefWidth="657.0">
+            <columns>
+                <TableColumn fx:id="colMed" prefWidth="110.0" text="Medico" />
+                <TableColumn fx:id="colPaz" prefWidth="110.0" text="Paziente" />
+                <TableColumn fx:id="colRez" prefWidth="110.0" text="Reazione Avversa" />
+                <TableColumn fx:id="colDataRa" prefWidth="110.0" text="Data R.A." />
+                <TableColumn fx:id="colDataS" prefWidth="110.0" text="Data Segn." />
+                <TableColumn fx:id="colVacc" prefWidth="110.0" text="Vaccinazioni" />
+            </columns>
+        </TableView>
+        <Button fx:id="SegnVacc" layoutX="24.0" layoutY="431.0" mnemonicParsing="false" onAction="#segn_vacc" prefHeight="25.0" prefWidth="216.0" text="Segnalazioni per vaccino" />
+        <Button fx:id="SegnSede" layoutX="260.0" layoutY="465.0" mnemonicParsing="false" onAction="#segn_sede" text="Segnalazioni per sede di vaccinazione" />
+        <Button fx:id="SegnProv" layoutX="260.0" layoutY="431.0" mnemonicParsing="false" onAction="#segn_prov" prefHeight="25.0" prefWidth="216.0" text="Segnalazioni per provincia" />
+        <Button fx:id="SegnGrav" layoutX="24.0" layoutY="465.0" mnemonicParsing="false" onAction="#segn_grav" prefHeight="25.0" prefWidth="216.0" text="Segnalazioni gravi in settimana" />
+        <Button fx:id="BackButton" layoutX="553.0" layoutY="427.0" mnemonicParsing="false" onAction="#indietro" prefHeight="59.0" prefWidth="93.0" text="Indietro" />
+        <Button fx:id="Visto" layoutX="197.0" layoutY="14.0" mnemonicParsing="false" onAction="#visto" text="Visto" />
+    </children>
 </AnchorPane>

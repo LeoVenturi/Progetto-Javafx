@@ -41,7 +41,7 @@ public class ControllerSegnalazione implements Initializable{ // aggiunge sia se
     private Parent root;
     private static Medico medico;
 
-    private  String[] codici;
+    private  String[] codici = {};
     //private ArrayList<String> codici = new ArrayList<>();
     private final ObservableList<String> L_Codici = FXCollections.observableArrayList(codici);
 

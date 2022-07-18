@@ -27,6 +27,12 @@ public class ControllerPaziente implements Initializable{
     private TextField ProvinciaText;
     @FXML
     private TextField ProfessioneText;
+    @FXML
+    private TextField DataTextfield;
+    @FXML
+    private ComboBox RischioCombobox;
+    @FXML
+    private TextArea DescrizioneTextarea;
 
     @FXML
     private ComboBox <String> Tipo;
@@ -42,7 +48,7 @@ public class ControllerPaziente implements Initializable{
     @FXML
     private TextField Sede;
     @FXML
-    private TextField Data;
+    private TextField DataV;
 
     @FXML
     private Button ButtonInvia;
@@ -65,8 +71,8 @@ public class ControllerPaziente implements Initializable{
     private final String[] nomi = {"AstraZeneca", "Pfizer", "Moderna", "Sputnik", "Sinovac", "Antinfluenzale"};
     private final ObservableList<String> L_Nomi = FXCollections.observableArrayList(nomi);
 
-    private ArrayList<FattoreRischio> ListaFattori = new ArrayList<>();
-    private ArrayList<Vaccinazioni> ListaVaccini = new ArrayList<>();
+    ArrayList<FattoreRischio> ListaFattori = new ArrayList<>();
+    ArrayList<Vaccinazioni> ListaVaccini = new ArrayList<>();
 
 
 
@@ -75,9 +81,13 @@ public class ControllerPaziente implements Initializable{
         String professione = ProfessioneText.getText();
         String prov = ProvinciaText.getText();
 
-        medico.aggiungiPaziente(new Paziente(anno, prov, professione, ListaFattori, ListaVaccini));
-        for(Paziente i: medico.getPazienti())
-        	System.out.println("lista dei pazienti -> "+ i.toString());
+        String data = DataTextfield.getText();
+        String descrizione = DescrizioneTextarea.getText();
+
+        int grav = (int) RischioCombobox.getSelectionModel().getSelectedItem();
+
+        new Paziente(anno, prov, professione, ListaFattori, ListaVaccini);
+
         root = FXMLLoader.load(getClass().getResource("InterfacciaMedico.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -91,23 +101,17 @@ public class ControllerPaziente implements Initializable{
         String tipo = (String) Tipo.getSelectionModel().getSelectedItem();
 
         ListaFattori.add(new FattoreRischio(tipo, descrizione, livello));
-        //System.out.println("Sono qui 1.");
-        //System.out.println(ListaFattori.size());
-        Livello.getSelectionModel().select("vuoto");
-        Tipo.getSelectionModel().select("vuoto");
+        System.out.printf("Sono qui 1.");
     }
 
     public void vaccini(ActionEvent event){
-        String data = Data.getText();
+        String data = DataV.getText();
         String sede = Sede.getText();
         String nome_vacc = (String) NomeVaccino.getSelectionModel().getSelectedItem();
         String dose = (String) TipoSomm.getSelectionModel().getSelectedItem();
 
         ListaVaccini.add(new Vaccinazioni(nome_vacc, dose, sede, data));
-       // System.out.println("Sono qui 2.");
-        //System.out.println(ListaVaccini.size());
-        NomeVaccino.getSelectionModel().select("vuoto");
-        TipoSomm.getSelectionModel().select("vuoto");
+        System.out.printf("Sono qui 2.");
     }
 
     public void indietro (ActionEvent event) throws IOException {
@@ -124,6 +128,8 @@ public class ControllerPaziente implements Initializable{
 
         NomeVaccino.getItems().addAll(L_Nomi);
         TipoSomm.getItems().addAll("I", "II", "III", "IV", "Dose Unica");
+
+        RischioCombobox.getItems().addAll(1, 2, 3, 4, 5);
     }
     public void questoMedico(Medico m) {	// si tira dietro il medico dal login
     	System.out.println(m.toString());
