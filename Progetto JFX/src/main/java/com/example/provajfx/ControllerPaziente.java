@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.PieChart.Data;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
@@ -29,6 +30,8 @@ public class ControllerPaziente implements Initializable{
     private TextField ProfessioneText;
     @FXML
     private TextField DataTextfield;
+    @FXML
+    private ComboBox ReazioenAvversa;
     @FXML
     private ComboBox RischioCombobox;
     @FXML
@@ -83,11 +86,16 @@ public class ControllerPaziente implements Initializable{
 
         String data = DataTextfield.getText();
         String descrizione = DescrizioneTextarea.getText();
-
-        int grav = (int) RischioCombobox.getSelectionModel().getSelectedItem();
-
-        new Paziente(anno, prov, professione, ListaFattori, ListaVaccini);
-
+        
+        Paziente p1 = new Paziente(anno, prov, professione, ListaFattori, ListaVaccini);
+        	
+        int livello = (int) Livello.getSelectionModel().getSelectedItem();		// prendo i dati per creare la Reazione avversa
+        String desc = Descrizione.getText();
+        String tipo = (String) ReazioenAvversa.getSelectionModel().getSelectedItem();
+        ReazioneAvversa r1 = new ReazioneAvversa(tipo, livello,desc);
+        
+        new Segnalazioni(p1, r1,DataTextfield.getText());	// reazione adversa
+        medico.aggiungiPaziente(p1);
         root = FXMLLoader.load(getClass().getResource("InterfacciaMedico.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -128,11 +136,15 @@ public class ControllerPaziente implements Initializable{
 
         NomeVaccino.getItems().addAll(L_Nomi);
         TipoSomm.getItems().addAll("I", "II", "III", "IV", "Dose Unica");
-
-        RischioCombobox.getItems().addAll(1, 2, 3, 4, 5);
+        
+       
+        ObservableList<String> L_Reazioni = FXCollections.observableArrayList(ReazioneAvversa.nomeUnivoco);
+        ReazioenAvversa.getItems().addAll(L_Reazioni);								// teandina possibili reazioni
+        RischioCombobox.getItems().addAll(1, 2, 3, 4, 5);						// tendina gravita
     }
     public void questoMedico(Medico m) {	// si tira dietro il medico dal login
     	System.out.println(m.toString());
     	this.medico = m;
     }
+    
 }

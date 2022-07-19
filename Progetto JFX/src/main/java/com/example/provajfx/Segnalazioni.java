@@ -6,15 +6,18 @@ import java.util.List;
 
 public class Segnalazioni {
 
-	public int codice;
-	public Paziente paziente;
-	public ReazioneAvversa reazione;
-	public String data;
+	
+	private static int inizio = 0;
+	private int codice;
+	private Paziente paziente;
+	private ReazioneAvversa reazione;
+	private String data;
 
 
-	public Segnalazioni(int codice, Paziente paziente, ReazioneAvversa reazioni, String data) {
+	public Segnalazioni(Paziente paziente, ReazioneAvversa reazioni, String data) {
 		//aggiungere controlli
-		this.codice = codice;
+		
+		this.codice = inizio++;		// assegno piu incremento
 		this.paziente = paziente;
 		this.reazione = reazioni;
 		this.data = data;

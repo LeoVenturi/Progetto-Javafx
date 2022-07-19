@@ -65,7 +65,6 @@ public class Paziente {
 		}
 		
 		public String toString() {
-			
 			return this.codice +", " +this.professione;
 		}
 		

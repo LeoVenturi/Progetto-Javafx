@@ -50,6 +50,8 @@ public class ControllerInterfacciaMedico {
     public void paziente (ActionEvent event) throws IOException {
        // root = FXMLLoader.load(getClass().getResource("Paziente.fxml"));
     	
+    	System.out.println("numero pazienti registrati -> " + m.getPazienti().size());
+    	
     	FXMLLoader loader = new FXMLLoader(getClass().getResource("Paziente.fxml"));
     	root = loader.load();
     	

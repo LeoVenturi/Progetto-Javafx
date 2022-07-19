@@ -1,23 +1,34 @@
 package com.example.provajfx;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ReazioneAvversa {
-	private int codice;
+	protected final static ArrayList<String> nomeUnivoco = new ArrayList<>(Arrays.asList("malessere generale", "nausea", "mal di testa", "intorpidimento degli arti"));
+	
+	private final String nome;
 	private String descrizione;
 	private int livello;
+	//private ArrayList<String>() lista = new ArrayList<>();
 	
-	public ReazioneAvversa(int codice, String descrizione, int livello) {
+	
+	public ReazioneAvversa(String codice, int livello, String descrizione) {
 		if(livello < 1 || livello > 5)
 			throw new IllegalArgumentException();
-		this.codice = codice;
-		this.descrizione = descrizione;
-		this.livello = livello;
+		else this.livello = livello;
+		if(nomeUnivoco.contains(codice))
+			this.nome = codice;
+		else
+			throw new IllegalArgumentException();
+		if(descrizione == null )
+			throw new IllegalArgumentException();
+		else this.descrizione = descrizione;
 	}
-	
-	public int getCodice() {
-		return this.codice;
+	public ArrayList ritornaListaReazioni(){
+		return this.nomeUnivoco;
 	}
 	
 	public String getDescrizione() {
@@ -27,4 +38,7 @@ public class ReazioneAvversa {
 	public int getLivello() {
 		return this.livello;
 	}
+	
+	
+	
 }

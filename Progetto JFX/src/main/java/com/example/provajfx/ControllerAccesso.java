@@ -41,6 +41,7 @@ public class ControllerAccesso {
     
     
     private String pass, nome;
+    protected static Medico medico;
 
     
     
@@ -79,15 +80,18 @@ public class ControllerAccesso {
     
     protected Medico ritornaMedico(String user, String pass) {
     	for(Medico i: listaMedici) {
-    		if( i.findMed_Username(user, pass))
+    		if( i.findMed_Username(user, pass)) {
+    			this.medico = i;
     			return i;
+    		}
     	}
     	return null;
     }
     protected Farmacologo ritornaFarmacologo(String user, String pass) {
     	for(Farmacologo i: listaFarmacologo) {
-    		if( i.findMed_Username(user, pass))
+    		if( i.findMed_Username(user, pass)) 
     			return i;
+    	
     	}
     	return null;
     }
@@ -96,6 +100,8 @@ public class ControllerAccesso {
     public void accedi(ActionEvent event) throws IOException{
         String user = UsenameTextfield.getText();
         String pass = PasswordTextfield.getText();
+        medico = ritornaMedico(user,pass);
+        
         m2.aggiungiPaziente(p1);
         listaMedici.add(m1);
         listaMedici.add(m2);
@@ -158,6 +164,9 @@ public class ControllerAccesso {
 			 Farmacologo.mandaSegnale();
 		 }
 	 }
+	 public Medico ritornaMedico() {
+	    	return medico;
+	    }
 }	
 
 
