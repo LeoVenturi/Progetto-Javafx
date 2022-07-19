@@ -30,6 +30,8 @@ public class ControllerSegnalazione implements Initializable{ // aggiunge sia se
     @FXML
     private ComboBox RischioCombobox;
     @FXML
+    private ComboBox ReazAvversa;			// usero qu
+    @FXML
     private TextArea DescrizioneTextarea;
     @FXML
     private Button SegnalazioneButton;
@@ -41,19 +43,21 @@ public class ControllerSegnalazione implements Initializable{ // aggiunge sia se
     private Parent root;
     private static Medico medico;
 
-    //private  String[] codici = {"primo", "secondo"};
-    
-
-//    private void ritornaPazienti() {
-//    	codici = medico.getPazienti().toArray(new String[0]);
-//    }
-    
     public void invia(ActionEvent event) throws IOException {
         String data = DataTextfield.getText();
         String descrizione = DescrizioneTextarea.getText();
         
         int grav = (int) RischioCombobox.getSelectionModel().getSelectedItem();	
         int cod = (int) PazienteCombobox.getSelectionModel().getSelectedItem();
+        String reazione = (String) ReazAvversa.getSelectionModel().getSelectedItem();
+        
+        for(Paziente i: medico.getPazienti()) {
+        	if (i.getCodice() == cod) {
+        		ReazioneAvversa r1 = new ReazioneAvversa(reazione, grav, descrizione);
+        		Segnalazioni s1 = new Segnalazioni(i, r1, data);
+        
+        	}
+        }
 
         root = FXMLLoader.load(getClass().getResource("InterfacciaMedico.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -71,17 +75,21 @@ public class ControllerSegnalazione implements Initializable{ // aggiunge sia se
     }
 
     public void initialize(URL url, ResourceBundle resourcebundle){
-    	this.medico = ControllerAccesso.medico;
-    	
-    	 ArrayList<String> codici = new ArrayList<>();
-    	 for(Paziente i: medico.getPazienti()) {
-          	codici.add(String.valueOf(i.getCodice()));
-          }
-    	 
-         ObservableList<String> L_Codici = FXCollections.observableArrayList(codici);
-    	
+
+    	this.medico = ControllerAccesso.medico;		// ottengo il medico dall'accesso
+
+    	ArrayList<String> codici = new ArrayList<>();
+    	for(Paziente i: medico.getPazienti()) {
+    		codici.add(String.valueOf(i.getCodice()));
+    		//System.out.println(String.valueOf(i.getCodice()));
+    	}
+    	ObservableList<String> L_Codici = FXCollections.observableArrayList(codici);
     	PazienteCombobox.setItems(L_Codici);
-        RischioCombobox.getItems().addAll(1, 2, 3, 4, 5);
+
+    	ObservableList<String> L_Reazioni = FXCollections.observableArrayList(ReazioneAvversa.nomeUnivoco);
+    	ReazAvversa.getItems().addAll(L_Reazioni);									// teandina possible reazioni
+
+    	RischioCombobox.getItems().addAll(1, 2, 3, 4, 5);
     }
     
     public void questoMedico(Medico m) {	// si tira dietro il medico dal login

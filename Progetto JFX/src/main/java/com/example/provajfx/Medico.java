@@ -7,6 +7,7 @@ import java.util.Map;
 public class Medico extends Accessi {
 	private ArrayList<Paziente> lista_pazienti = new ArrayList<Paziente>();
 	private ArrayList<Segnalazioni> segnalazioni = new ArrayList<>();
+	
 	public Medico(String pass, String nomeUtente) {
 		super(pass, nomeUtente);
 	}

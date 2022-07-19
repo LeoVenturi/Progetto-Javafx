@@ -9,7 +9,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.chart.PieChart.Data;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
@@ -92,9 +91,9 @@ public class ControllerPaziente implements Initializable{
         int livello = (int) Livello.getSelectionModel().getSelectedItem();		// prendo i dati per creare la Reazione avversa
         String desc = Descrizione.getText();
         String tipo = (String) ReazioenAvversa.getSelectionModel().getSelectedItem();
-        ReazioneAvversa r1 = new ReazioneAvversa(tipo, livello,desc);
+        ReazioneAvversa r1 = new ReazioneAvversa(tipo, livello,desc); // reazione adversa
         
-        new Segnalazioni(p1, r1,DataTextfield.getText());	// reazione adversa
+        new Segnalazioni(p1, r1,DataTextfield.getText());				// segnalazione
         medico.aggiungiPaziente(p1);
         root = FXMLLoader.load(getClass().getResource("InterfacciaMedico.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -109,7 +108,7 @@ public class ControllerPaziente implements Initializable{
         String tipo = (String) Tipo.getSelectionModel().getSelectedItem();
 
         ListaFattori.add(new FattoreRischio(tipo, descrizione, livello));
-        System.out.printf("Sono qui 1.");
+        //System.out.printf("Sono qui 1.");
     }
 
     public void vaccini(ActionEvent event){
@@ -119,7 +118,7 @@ public class ControllerPaziente implements Initializable{
         String dose = (String) TipoSomm.getSelectionModel().getSelectedItem();
 
         ListaVaccini.add(new Vaccinazioni(nome_vacc, dose, sede, data));
-        System.out.printf("Sono qui 2.");
+        //System.out.printf("Sono qui 2.");
     }
 
     public void indietro (ActionEvent event) throws IOException {
@@ -136,14 +135,13 @@ public class ControllerPaziente implements Initializable{
 
         NomeVaccino.getItems().addAll(L_Nomi);
         TipoSomm.getItems().addAll("I", "II", "III", "IV", "Dose Unica");
-        
-       
+        																	 
         ObservableList<String> L_Reazioni = FXCollections.observableArrayList(ReazioneAvversa.nomeUnivoco);
         ReazioenAvversa.getItems().addAll(L_Reazioni);								// teandina possibili reazioni
         RischioCombobox.getItems().addAll(1, 2, 3, 4, 5);						// tendina gravita
     }
     public void questoMedico(Medico m) {	// si tira dietro il medico dal login
-    	System.out.println(m.toString());
+    	//System.out.println(m.toString());
     	this.medico = m;
     }
     

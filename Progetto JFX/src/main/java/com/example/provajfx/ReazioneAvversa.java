@@ -27,8 +27,8 @@ public class ReazioneAvversa {
 			throw new IllegalArgumentException();
 		else this.descrizione = descrizione;
 	}
-	public ArrayList ritornaListaReazioni(){
-		return this.nomeUnivoco;
+	public ArrayList<String> ritornaListaReazioni(){
+		return ReazioneAvversa.nomeUnivoco;
 	}
 	
 	public String getDescrizione() {

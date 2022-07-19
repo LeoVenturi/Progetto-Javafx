@@ -17,7 +17,9 @@ public class Segnalazioni {
 	public Segnalazioni(Paziente paziente, ReazioneAvversa reazioni, String data) {
 		//aggiungere controlli
 		
-		this.codice = inizio++;		// assegno piu incremento
+		this.codice = inizio;		// assegno piu incremento
+		inizio = inizio +2;
+		System.out.println("Il codice usatp -> " + this.codice);
 		this.paziente = paziente;
 		this.reazione = reazioni;
 		this.data = data;

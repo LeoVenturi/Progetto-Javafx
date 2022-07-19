@@ -11,7 +11,7 @@ public class Paziente {
 		private String professione;
 		private ArrayList<FattoreRischio> fattori = new ArrayList<>();
 		ArrayList<Vaccinazioni> vaccini = new ArrayList<Vaccinazioni>();
-		private int codice_assegnato = 0;
+		private static int codice_assegnato = 0;
 		private static String Provincie[] = {"AG", "AL", "AN", "AO", "AQ", "AR", "AP", "AT",
 				"AV", "BA", "BT", "BL", "BN", "BG", "BI", "BO", "BZ", "BS", "BR", "CA", "CL",
 				"CB", "CI", "CE", "CT", "CZ", "CH", "CO", "CS", "CR", "KR", "CN", "EN", "FM",
