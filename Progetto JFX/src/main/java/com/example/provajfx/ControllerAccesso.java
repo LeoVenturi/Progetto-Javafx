@@ -138,7 +138,7 @@ public class ControllerAccesso {
         	Farmacologo f2 = ritornaFarmacologo(user,pass);
         	
         	ilFarmacologo.questoFarmacologo(f2);
-        	
+        	f2.toString();
         	Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			Scene scene = new Scene(root);
 			stage.setScene(scene);

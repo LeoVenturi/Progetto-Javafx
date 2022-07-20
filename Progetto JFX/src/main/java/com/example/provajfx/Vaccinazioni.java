@@ -48,4 +48,5 @@ public class Vaccinazioni {
 	public String getSede() {
 		return this.sede;
 	}
+	
 }

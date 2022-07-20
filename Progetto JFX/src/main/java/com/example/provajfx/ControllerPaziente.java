@@ -93,7 +93,8 @@ public class ControllerPaziente implements Initializable{
         String tipo = (String) ReazioenAvversa.getSelectionModel().getSelectedItem();
         ReazioneAvversa r1 = new ReazioneAvversa(tipo, livello,desc); // reazione adversa
         
-        new Segnalazioni(p1, r1,DataTextfield.getText());				// segnalazione
+       Segnalazioni segnalazione = new Segnalazioni(p1, r1,DataTextfield.getText()); // segnalazione
+       p1.addSegnalazione(segnalazione);
         medico.aggiungiPaziente(p1);
         root = FXMLLoader.load(getClass().getResource("InterfacciaMedico.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

@@ -41,39 +41,32 @@ public class Farmacologo extends Accessi{
 		segnalazioni_gravi_tot = 0;
 		for(Medico medico: medici) {
 			for(Paziente paziente: medico.getPazienti()) {
-				ArrayList<Vaccinazioni> vaccini = new ArrayList<>();
-				vaccini = paziente.getVaccino();
-				for(Vaccinazioni vaccino: vaccini) {
-					Segnalazioni segnalazione = vaccino.getSegnalazione();
-					ReazioneAvversa reazione = segnalazione.getReazione();
-					if(reazione.getLivello() == 5 || reazione.getLivello() == 4 || reazione.getLivello() == 3)
+				for(Segnalazioni segnalazione: paziente.getSegnalazioni()) {
+					if(segnalazione.getReazione().getLivello() > 2 )
 						segnalazioni_gravi_tot ++;
 				}
 			}
 		}
 		String result = "";
-		return result += "Numero di segnalazioni gravi in settimana = " + segnalazioni_gravi_tot + "\n";
+		return result += "\n Numero di segnalazioni gravi in settimana = " + segnalazioni_gravi_tot + "\n";
 	}
 	
 	public String SegnalazioneVaccino() {
 		AzzeraSegnalazioni();
-		String result = "Segnalazioni per vaccino: \n";
+		String result = "\n Segnalazioni per vaccino: \n";
 		
 		for(Medico medico: medici) {
 			for(Paziente paziente: medico.getPazienti()) {
-				ArrayList<Vaccinazioni> vaccini = new ArrayList<>();
-				vaccini = paziente.getVaccino();
-				for(Vaccinazioni vaccino: vaccini) {
-					String vax = vaccino.getVaccino();
-					Segnalazioni segnalazione = vaccino.getSegnalazione();
-					ReazioneAvversa reazione = segnalazione.getReazione();
-					if(num_segnalazioni.containsKey(vax)) {
-						int num = num_segnalazioni.get(vax);
-						num ++;
-						num_segnalazioni.put(vax, num);
+				int num = 0;
+				for(Segnalazioni segnalazione: paziente.getSegnalazioni())
+					num++;
+				for(Vaccinazioni vaccini: paziente.getVaccino()) {
+					if(num_segnalazioni.containsKey(vaccini.getVaccino())) {
+						int temp = num_segnalazioni.get(vaccini.getVaccino());
+						num_segnalazioni.put(vaccini.getVaccino(), temp + num);		
 					}
 					else
-						num_segnalazioni.put(vax, 1);
+						num_segnalazioni.put(vaccini.getVaccino(), num);
 				}
 			}
 		}
@@ -85,23 +78,19 @@ public class Farmacologo extends Accessi{
 	
 	public String SegnalazioniSede(){
 		AzzeraSedi();
-		String result = "Segnalazioni per sede: \n";
+		String result = "\n Segnalazioni per sede: \n";
 		for(Medico medico: medici) {
 			for(Paziente paziente: medico.getPazienti()) {
-				ArrayList<Vaccinazioni> vaccini = new ArrayList<>();
-				vaccini = paziente.getVaccino();
-				for(Vaccinazioni vaccino: vaccini) {
-					String vax = vaccino.getVaccino();
-					Segnalazioni segnalazione = vaccino.getSegnalazione();
-					ReazioneAvversa reazione = segnalazione.getReazione();
-					
-					if(num_segnalazioni_sede.containsKey(vaccino.getSede())) {
-						int num = num_segnalazioni_sede.get(vaccino.getSede());
-						num ++;
-						num_segnalazioni_sede.put(vaccino.getSede(), num);
+				int num = 0;
+				for(Segnalazioni segnalazione: paziente.getSegnalazioni())
+					num++;
+				for(Vaccinazioni vaccini: paziente.getVaccino()) {
+					if(num_segnalazioni_sede.containsKey(vaccini.getSede())) {
+						int temp = num_segnalazioni_sede.get(vaccini.getSede());
+						num_segnalazioni_sede.put(vaccini.getSede(), num + temp);
 					}
 					else
-						num_segnalazioni_sede.put(vaccino.getSede(), 1);
+						num_segnalazioni_sede.put(vaccini.getSede(), num);
 				}
 			}
 		}
@@ -118,21 +107,23 @@ public class Farmacologo extends Accessi{
 		//segnalazioni per vaccino
 		for(Medico medico: medici) {
 			for(Paziente paziente: medico.getPazienti()) {
-				ArrayList<Vaccinazioni> vaccini = new ArrayList<>();
-				vaccini = paziente.getVaccino();
-				for(Vaccinazioni vaccino: vaccini) {
-					String vax = vaccino.getVaccino();
-					Segnalazioni segnalazione = vaccino.getSegnalazione();
-					ReazioneAvversa reazione = segnalazione.getReazione();
-						
-				}									
+													
 				if(num_segnalazioni_provincia.containsKey(paziente.getProvincia())) {
 					int num = num_segnalazioni_provincia.get(paziente.getProvincia());
-					num ++;
+					for(Segnalazioni segnalazione: paziente.getSegnalazioni()) {
+						num++;
+					}
 					num_segnalazioni_provincia.put(paziente.getProvincia(), num);
 				}
-				else
-					num_segnalazioni_provincia.put(paziente.getProvincia(), 1);
+				else {
+					int num = 0;
+					for(Segnalazioni segnalazione: paziente.getSegnalazioni()) {
+						num++;
+					}
+					num_segnalazioni_provincia.put(paziente.getProvincia(), num);
+					
+				}
+					
 					
 			}
 		}
