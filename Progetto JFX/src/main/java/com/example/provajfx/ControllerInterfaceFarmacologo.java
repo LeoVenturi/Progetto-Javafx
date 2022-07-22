@@ -1,5 +1,7 @@
 package com.example.provajfx;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,19 +27,19 @@ public class ControllerInterfaceFarmacologo implements Initializable {
     @FXML
     private Label PropVacc;
     @FXML
-    private TableView Tabella;
+    private TableView<Segnalazioni> Tabella;
     @FXML
-    private TableColumn colMed;
+    private TableColumn<Segnalazioni, String> colMed;
     @FXML
-    private TableColumn colPaz;
+    private TableColumn<Segnalazioni, Integer>  colPaz;
     @FXML
-    private TableColumn colRez;
+    private TableColumn<Segnalazioni, String> colRez;
     @FXML
-    private TableColumn colDataRa;
+    private TableColumn<Segnalazioni, String > colDataRa;
     @FXML
-    private TableColumn colDataS;
+    private TableColumn<Segnalazioni, String> colDataS;
     @FXML
-    private TableColumn colVacc;
+    private TableColumn<Segnalazioni, String> colVacc;
     @FXML
     private Button Visto;
     @FXML
@@ -52,9 +54,6 @@ public class ControllerInterfaceFarmacologo implements Initializable {
     private Button Prop;
     @FXML
     private Button BackButton;
-
-    //medico, paziente, reazione avversa, data reazione avversa, data segnalazione, vaccinazioni ricevute nei due mesi precedenti alla segnalazione
-
 
     private Stage stage;
     private Scene scene;
@@ -75,7 +74,7 @@ public class ControllerInterfaceFarmacologo implements Initializable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("FaSeganlazioniVaccino.fxml"));
         Parent root = loader.load();
         ControllerFaSeganlazioniVaccino scene2Controller = loader.getController();
-        scene2Controller.displayName("---");
+        scene2Controller.displayName("---");//Farmacologo.SegnalazioneVaccino()
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();
@@ -124,16 +123,26 @@ public class ControllerInterfaceFarmacologo implements Initializable {
         stage.show();
     }
 
+    ObservableList<Segnalazioni> lista = FXCollections.observableArrayList();
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        colMed.setCellValueFactory(new PropertyValueFactory<>("colMed"));
-        colPaz.setCellValueFactory(new PropertyValueFactory<>("colPaz"));
-        colRez.setCellValueFactory(new PropertyValueFactory<>("colRez"));
-        colDataRa.setCellValueFactory(new PropertyValueFactory<>("colDataRa"));
-        colDataS.setCellValueFactory(new PropertyValueFactory<>("colDataS"));
-        colVacc.setCellValueFactory(new PropertyValueFactory<>("colMed"));
 
-        //Tabella.setItems();
+        for(Medico med : f.getMedici()) {
+            for(Segnalazioni segnalazione: med.getSegnalazioni())
+                lista.add(segnalazione);
+        }
+
+
+        colMed.setCellValueFactory(new PropertyValueFactory<Segnalazioni, String>("codMed"));
+        colPaz.setCellValueFactory(new PropertyValueFactory<Segnalazioni, Integer>("codPaz"));
+        colRez.setCellValueFactory(new PropertyValueFactory<Segnalazioni, String>("codRe"));
+        colDataRa.setCellValueFactory(new PropertyValueFactory<Segnalazioni, String>("dataRe"));
+        colDataS.setCellValueFactory(new PropertyValueFactory<Segnalazioni, String>("dataSegn"));
+        colVacc.setCellValueFactory(new PropertyValueFactory<Segnalazioni, String>("colVacc"));
+
+        Tabella.setItems(lista);
 
         if (i == 0){
             LimSegn.setVisible(false);

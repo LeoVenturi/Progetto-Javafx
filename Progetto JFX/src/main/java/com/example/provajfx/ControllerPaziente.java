@@ -30,6 +30,8 @@ public class ControllerPaziente implements Initializable{
     @FXML
     private TextField DataTextfield;
     @FXML
+    private TextField DataReTextfield;
+    @FXML
     private ComboBox ReazioenAvversa;
     @FXML
     private ComboBox RischioCombobox;
@@ -83,18 +85,24 @@ public class ControllerPaziente implements Initializable{
         String professione = ProfessioneText.getText();
         String prov = ProvinciaText.getText();
 
-        String data = DataTextfield.getText();
+        String currentdata = DataTextfield.getText();
+        String dataRe = DataReTextfield.getText();
         String descrizione = DescrizioneTextarea.getText();
         
         Paziente p1 = new Paziente(anno, prov, professione, ListaFattori, ListaVaccini);
+        int codPaz = p1.getCodice();
+
+        String codMed = medico.toString();
         	
         int livello = (int) Livello.getSelectionModel().getSelectedItem();		// prendo i dati per creare la Reazione avversa
         String desc = Descrizione.getText();
+
         String tipo = (String) ReazioenAvversa.getSelectionModel().getSelectedItem();
         ReazioneAvversa r1 = new ReazioneAvversa(tipo, livello,desc); // reazione adversa
+        int codRe = r1.getCodice();
         
-       Segnalazioni segnalazione = new Segnalazioni(p1, r1,DataTextfield.getText()); // segnalazione
-       p1.addSegnalazione(segnalazione);
+        Segnalazioni segnalazione = new Segnalazioni(p1, r1, currentdata, dataRe, codMed, codPaz, codRe); // segnalazione
+        p1.addSegnalazione(segnalazione);
         medico.aggiungiPaziente(p1);
         root = FXMLLoader.load(getClass().getResource("InterfacciaMedico.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

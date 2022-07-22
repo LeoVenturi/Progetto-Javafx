@@ -35,6 +35,6 @@ public class Medico extends Accessi {
 		this.lista_pazienti.add(paziente);
 		this.toString();
 	}
-	
+	public ArrayList<Segnalazioni> getSegnalazioni(){return segnalazioni;}
 	
 }

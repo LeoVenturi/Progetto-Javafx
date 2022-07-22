@@ -155,7 +155,7 @@ public class Farmacologo extends Accessi{
 		return result;
 	}
 	
-	
+	public ArrayList<Medico> getMedici(){return medici;}
 	
 	
 

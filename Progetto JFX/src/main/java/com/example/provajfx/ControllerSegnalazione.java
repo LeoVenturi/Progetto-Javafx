@@ -28,6 +28,8 @@ public class ControllerSegnalazione implements Initializable{ // aggiunge sia se
     @FXML
     private TextField DataTextfield;
     @FXML
+    private TextField DataReTextfield;
+    @FXML
     private ComboBox RischioCombobox;
     @FXML
     private ComboBox ReazAvversa;			// usero qu
@@ -44,17 +46,26 @@ public class ControllerSegnalazione implements Initializable{ // aggiunge sia se
     private static Medico medico;
 
     public void invia(ActionEvent event) throws IOException {
-        String data = DataTextfield.getText();
+        String currentdata = DataTextfield.getText();
+        String dataRe = DataTextfield.getText();
         String descrizione = DescrizioneTextarea.getText();
         
-        int grav = (int) RischioCombobox.getSelectionModel().getSelectedItem();	
-        int cod = (int) PazienteCombobox.getSelectionModel().getSelectedItem();
+        int grav = (int) RischioCombobox.getSelectionModel().getSelectedItem();
+        String cod = (String) PazienteCombobox.getSelectionModel().getSelectedItem();
         String reazione = (String) ReazAvversa.getSelectionModel().getSelectedItem();
+
+        String codMed = medico.toString();
         
         for(Paziente i: medico.getPazienti()) {
-        	if (i.getCodice() == cod) {
+        	if (i.getCodice() == Integer.parseInt(cod)) {
+
+                int codPaz = i.getCodice();
+
         		ReazioneAvversa r1 = new ReazioneAvversa(reazione, grav, descrizione);
-        		Segnalazioni s1 = new Segnalazioni(i, r1, data);
+
+                int codRe = r1.getCodice();
+
+        		Segnalazioni s1 = new Segnalazioni(i, r1, currentdata, dataRe, codMed, codPaz, codRe);
         
         	}
         }

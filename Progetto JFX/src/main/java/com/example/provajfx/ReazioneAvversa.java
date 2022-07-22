@@ -8,14 +8,19 @@ import java.util.Map;
 
 public class ReazioneAvversa {
 	protected final static ArrayList<String> nomeUnivoco = new ArrayList<>(Arrays.asList("malessere generale", "nausea", "mal di testa", "intorpidimento degli arti"));
-	
+
+	private int codice;
 	private final String nome;
 	private String descrizione;
 	private int livello;
+	private static int codice_assegnato = 0;
 	//private ArrayList<String>() lista = new ArrayList<>();
 	
 	
 	public ReazioneAvversa(String codice, int livello, String descrizione) {
+		this.codice = codice_assegnato;
+		codice_assegnato ++;
+
 		if(livello < 1 || livello > 5)
 			throw new IllegalArgumentException();
 		else this.livello = livello;
@@ -30,6 +35,8 @@ public class ReazioneAvversa {
 	public ArrayList<String> ritornaListaReazioni(){
 		return ReazioneAvversa.nomeUnivoco;
 	}
+
+	public int getCodice(){return this.codice;}
 	
 	public String getDescrizione() {
 		return this.descrizione;
