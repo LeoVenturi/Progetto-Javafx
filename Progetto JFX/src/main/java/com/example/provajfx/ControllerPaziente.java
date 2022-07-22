@@ -11,13 +11,17 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class ControllerPaziente implements Initializable{
@@ -27,8 +31,8 @@ public class ControllerPaziente implements Initializable{
     private TextField ProvinciaText;
     @FXML
     private TextField ProfessioneText;
-    @FXML
-    private TextField DataTextfield;
+//    @FXML
+//    private TextField DataTextfield;		// la segnalazione prende la data attuale
     @FXML
     private ComboBox ReazioenAvversa;
     @FXML
@@ -50,7 +54,7 @@ public class ControllerPaziente implements Initializable{
     @FXML
     private TextField Sede;
     @FXML
-    private TextField DataV;
+    private DatePicker DataV;
 
     @FXML
     private Button ButtonInvia;
@@ -83,18 +87,18 @@ public class ControllerPaziente implements Initializable{
         String professione = ProfessioneText.getText();
         String prov = ProvinciaText.getText();
 
-        String data = DataTextfield.getText();
+       // String data = DataTextfield.getText();
+        Date dataOggi = new Date();				// prende la data di oggi
         String descrizione = DescrizioneTextarea.getText();
         
-        Paziente p1 = new Paziente(anno, prov, professione, ListaFattori, ListaVaccini);
+        Paziente p1 = new Paziente(dataOggi, prov, professione, ListaFattori, ListaVaccini);
         	
         int livello = (int) Livello.getSelectionModel().getSelectedItem();		// prendo i dati per creare la Reazione avversa
         String desc = Descrizione.getText();
         String tipo = (String) ReazioenAvversa.getSelectionModel().getSelectedItem();
         ReazioneAvversa r1 = new ReazioneAvversa(tipo, livello,desc); // reazione adversa
         
-       Segnalazioni segnalazione = new Segnalazioni(p1, r1,DataTextfield.getText()); // segnalazione
-       p1.addSegnalazione(segnalazione);
+        new Segnalazioni(p1, r1,dataOggi);				// segnalazione
         medico.aggiungiPaziente(p1);
         root = FXMLLoader.load(getClass().getResource("InterfacciaMedico.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -113,7 +117,10 @@ public class ControllerPaziente implements Initializable{
     }
 
     public void vaccini(ActionEvent event){
-        String data = DataV.getText();
+        LocalDate localDate = DataV.getValue();			// un magheggio per convertire LocalDate a Date
+        ZoneId defaultZoneId = ZoneId.systemDefault();
+        Date data = Date.from(localDate.atStartOfDay(defaultZoneId).toInstant());
+        
         String sede = Sede.getText();
         String nome_vacc = (String) NomeVaccino.getSelectionModel().getSelectedItem();
         String dose = (String) TipoSomm.getSelectionModel().getSelectedItem();
