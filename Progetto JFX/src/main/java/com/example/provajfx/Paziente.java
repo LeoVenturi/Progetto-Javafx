@@ -2,16 +2,18 @@ package com.example.provajfx;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 
 public class Paziente {
 
 		private int codice;
-		private int anno;
+		private Date anno;
 		private String provincia;
 		private String professione;
 		private ArrayList<FattoreRischio> fattori = new ArrayList<>();
 		ArrayList<Vaccinazioni> vaccini = new ArrayList<Vaccinazioni>();
-		ArrayList<Segnalazioni> segnalazioni = new ArrayList<>();
+		private  ArrayList<Segnalazioni> segnalazioni = new ArrayList<>();
 		private static int codice_assegnato = 0;
 		private static String Provincie[] = {"AG", "AL", "AN", "AO", "AQ", "AR", "AP", "AT",
 				"AV", "BA", "BT", "BL", "BN", "BG", "BI", "BO", "BZ", "BS", "BR", "CA", "CL",
@@ -25,33 +27,37 @@ public class Paziente {
 		ArrayList<String> Provincie_esistenti = new ArrayList<String>(Arrays.asList(Provincie));
 
 
-		public Paziente(int anno, String provincia, String professione, ArrayList<FattoreRischio> fattori_rischio, ArrayList<Vaccinazioni> vaccinazioni) {
-			//aggiunta codice univoco paziente
-			this.codice = codice_assegnato;
-			codice_assegnato ++;
+	public Paziente(Date anno, String provincia, String professione, ArrayList<FattoreRischio> fattori_rischio, ArrayList<Vaccinazioni> vaccinazioni) {
+		//aggiunta codice univoco paziente
+		this.codice = codice_assegnato;
+		codice_assegnato ++;
 
-			//aggiunta anno di nascita
-			if(anno > 2022)
-				throw new IllegalArgumentException();
-			else
-				this.anno = anno;
+		Calendar cal = Calendar.getInstance();		// andro a comparare la data attuale con la data attuale -3 min
+		cal.setTime(new Date());
+		cal.add(Calendar.MINUTE, -3);		// sottraggo 3 minuti
+		Date dateBefore1Days = cal.getTime();
+		//aggiunta anno di nascita
+		if(!anno.after(dateBefore1Days))	// tecnicamente il new Date prende la data attuale
+			this.anno = anno;
+		else
+			throw new IllegalArgumentException();
 
-			//aggiunta provincia
-			if(Provincie_esistenti.contains(provincia))
-				this.provincia = provincia;
-			else
-				throw new IllegalArgumentException();
+		//aggiunta provincia
+		if(Provincie_esistenti.contains(provincia))
+			this.provincia = provincia;
+		else
+			throw new IllegalArgumentException();
 
-			//aggiunta prefessione
-			this.professione = professione;
+		//aggiunta prefessione
+		this.professione = professione;
 
-			//aggiunta fattori a rischio
-			this.fattori = fattori_rischio;
+		//aggiunta fattori a rischio
+		this.fattori = fattori_rischio;
 
-			//aggiunta vaccinazioni
-			this.vaccini = vaccinazioni;
+		//aggiunta vaccinazioni
+		this.vaccini = vaccinazioni;
 
-		}
+	}
 		
 		public ArrayList<Vaccinazioni> getVaccino(){
 			return this.vaccini;
@@ -72,11 +78,15 @@ public class Paziente {
 		public void addSegnalazione (Segnalazioni segnalazione) {
 			segnalazioni.add(segnalazione);
 		}
+
 		public ArrayList<Segnalazioni> getSegnalazioni(){
 			return this.segnalazioni;
 		}
-		
-		
 
-
+	public String stampaSegnalazioni() {
+		String acc = "";
+		for(Segnalazioni i : segnalazioni)
+			acc += i + " " + "\n";
+		return acc;
+	}
 	}

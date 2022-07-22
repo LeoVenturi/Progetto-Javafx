@@ -22,11 +22,10 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class ControllerAccesso {
-
-
 
 	@FXML
     private TextField UsenameTextfield;
@@ -42,6 +41,7 @@ public class ControllerAccesso {
     
     private String pass, nome;
     protected static Medico medico;
+	protected static Farmacologo farmacologo;
 
     
     
@@ -50,11 +50,11 @@ public class ControllerAccesso {
     private Medico m3 = new Medico("3", "3");
     private Medico m4 = new Medico("4", "4");
     private Farmacologo f1 = new Farmacologo("1", "1");
-    private FattoreRischio f = new FattoreRischio("a caso", "A caso", 3);
-    private Vaccinazioni v1 = new Vaccinazioni("AstraZeneca", "III", "Roma", "4");
-    private ArrayList<FattoreRischio> listaFattori = new ArrayList<FattoreRischio>();
-    private ArrayList<Vaccinazioni> listaVaccini = new ArrayList<Vaccinazioni>();
-    private Paziente p1 = new Paziente(2, "VR", "alex",listaFattori ,listaVaccini);
+	private FattoreRischio f = new FattoreRischio("a caso", "A caso", 3);
+	private Vaccinazioni v1 = new Vaccinazioni("AstraZeneca", "III", "Roma", new Date());	// new Date prend ela data attuale
+	private ArrayList<FattoreRischio> listaFattori = new ArrayList<FattoreRischio>();
+	private ArrayList<Vaccinazioni> listaVaccini = new ArrayList<Vaccinazioni>();
+	//private Paziente p1 = new Paziente(new Date(), "VR", "alex",listaFattori ,listaVaccini);
     
     private static ArrayList<Medico> listaMedici = new ArrayList<>();
     private static ArrayList<Farmacologo> listaFarmacologo = new ArrayList<>();
@@ -89,7 +89,7 @@ public class ControllerAccesso {
     }
     protected Farmacologo ritornaFarmacologo(String user, String pass) {
     	for(Farmacologo i: listaFarmacologo) {
-    		if( i.findMed_Username(user, pass)) 
+    		if( i.findMed_Username(user, pass))
     			return i;
     	
     	}
@@ -101,8 +101,9 @@ public class ControllerAccesso {
         String user = UsenameTextfield.getText();
         String pass = PasswordTextfield.getText();
         medico = ritornaMedico(user,pass);
+		farmacologo = ritornaFarmacologo(user, pass);
         
-        m2.aggiungiPaziente(p1);
+        //m2.aggiungiPaziente(p1);
         listaMedici.add(m1);
         listaMedici.add(m2);
         listaMedici.add(m3);
@@ -127,21 +128,24 @@ public class ControllerAccesso {
         	Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			Scene scene = new Scene(root);
 			stage.setScene(scene);
+			stage.setTitle("Interfaccia Medico");
 			stage.show();
 
 		} else if(trovaFarmacologo(user, pass)){
+
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("InterfaceFarmacologo.fxml"));
         	root = loader.load();
         	
         	ControllerInterfaceFarmacologo ilFarmacologo = loader.getController();
         	
-        	Farmacologo f2 = ritornaFarmacologo(user,pass);
+			Farmacologo f2 = ritornaFarmacologo(user,pass);
         	
         	ilFarmacologo.questoFarmacologo(f2);
         	f2.toString();
         	Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			Scene scene = new Scene(root);
 			stage.setScene(scene);
+			stage.setTitle("Interfaccia Farmacologo");
 			stage.show();
 			
 		}else{

@@ -2,6 +2,7 @@ package com.example.provajfx;
 
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Segnalazioni {
@@ -16,11 +17,11 @@ public class Segnalazioni {
 	private int codice;
 	private Paziente paziente;
 	private ReazioneAvversa reazione;
-	private String dataSegn;
-	private String dataRe;
+	private Date dataSegn;
+	private Date dataRe;
 
 	//lista vaccini ultimi 2 mesi
-	public Segnalazioni(Paziente paziente, ReazioneAvversa reazioni, String datasegn, String datare, String codmed, int codpaz, int codre) {
+	public Segnalazioni(Paziente paziente, ReazioneAvversa reazioni, Date datasegn, Date datare, String codmed, int codpaz, int codre) {
 		//aggiungere controlli
 		
 		this.codice = inizio;		// assegno piu incremento
@@ -48,7 +49,11 @@ public class Segnalazioni {
 		return this.reazione;
 	}
 
-	public String getData() {
+	public Date getData() {
 		return this.dataSegn;
+	}
+
+	public String toString() {
+		return this.codice + "";
 	}
 }

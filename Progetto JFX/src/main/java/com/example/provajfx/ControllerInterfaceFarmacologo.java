@@ -74,9 +74,10 @@ public class ControllerInterfaceFarmacologo implements Initializable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("FaSeganlazioniVaccino.fxml"));
         Parent root = loader.load();
         ControllerFaSeganlazioniVaccino scene2Controller = loader.getController();
-        scene2Controller.displayName("---");//Farmacologo.SegnalazioneVaccino()
+        scene2Controller.displayName(f.SegnalazioneVaccino());
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
+        stage.setTitle("Segnalazioni Vaccino");
         stage.show();
     }
 
@@ -84,9 +85,10 @@ public class ControllerInterfaceFarmacologo implements Initializable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("FaSegnalazioniGravi.fxml"));
         Parent root = loader.load();
         ControllerFaSegnalazioniGravi scene2Controller = loader.getController();
-        scene2Controller.displayName("---");
+        scene2Controller.displayName(f.SegnalazioniGravi());
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
+        stage.setTitle("Segnalazioni Gravi");
         stage.show();
 
     }
@@ -95,18 +97,21 @@ public class ControllerInterfaceFarmacologo implements Initializable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("FaSegnalazioniProv.fxml"));
         Parent root = loader.load();
         ControllerFaSegnalazioniProv scene2Controller = loader.getController();
-        scene2Controller.displayName("---");
+        scene2Controller.displayName(f.SegnalazioniProvincia());
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
+        stage.setTitle("Segnalazioni Provincia");
         stage.show();
     }
+
     public void segn_sede (ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("FaSeganlazioniSede.fxml"));
         Parent root = loader.load();
         ControllerFaSeganlazioniSede scene2Controller = loader.getController();
-        scene2Controller.displayName("---");
+        scene2Controller.displayName(f.SegnalazioniSede());
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
+        stage.setTitle("Segnalazioni Sede");
         stage.show();
     }
 
@@ -120,6 +125,7 @@ public class ControllerInterfaceFarmacologo implements Initializable {
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
+        stage.setTitle("Accesso");
         stage.show();
     }
 
@@ -128,12 +134,12 @@ public class ControllerInterfaceFarmacologo implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        this.f = ControllerAccesso.farmacologo;
 
         for(Medico med : f.getMedici()) {
             for(Segnalazioni segnalazione: med.getSegnalazioni())
                 lista.add(segnalazione);
         }
-
 
         colMed.setCellValueFactory(new PropertyValueFactory<Segnalazioni, String>("codMed"));
         colPaz.setCellValueFactory(new PropertyValueFactory<Segnalazioni, Integer>("codPaz"));

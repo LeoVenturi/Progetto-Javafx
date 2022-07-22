@@ -10,20 +10,14 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.provajfx.ControllerSegnalazione">
    <children>
-      <TextField fx:id="DataTextfield" layoutX="15.0" layoutY="117.0" promptText="--/--/----" />
       <TextArea fx:id="DescrizioneTextarea" layoutX="365.0" layoutY="76.0" prefHeight="200.0" prefWidth="200.0" promptText="Descrizione" />
-      <ComboBox fx:id="RischioCombobox" layoutX="14.0" layoutY="251.0" prefWidth="150.0" />
+      <ComboBox fx:id="RischioCombobox" layoutX="14.0" layoutY="241.0" prefWidth="150.0" />
       <ComboBox fx:id="PazienteCombobox" layoutX="14.0" layoutY="51.0" prefWidth="150.0" />
       <Button fx:id="SegnalazioneButton" layoutX="365.0" layoutY="313.0" mnemonicParsing="false" onAction="#invia" prefHeight="42.0" prefWidth="101.0" text="Invia">
          <font>
             <Font size="18.0" />
          </font></Button>
-      <Label layoutX="68.0" layoutY="83.0" prefHeight="27.0" prefWidth="42.0" text="Data">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="59.0" layoutY="213.0" prefHeight="27.0" prefWidth="61.0" text="Gravità">
+      <Label layoutX="59.0" layoutY="200.0" prefHeight="27.0" prefWidth="61.0" text="Gravità">
          <font>
             <Font size="18.0" />
          </font>
@@ -40,11 +34,11 @@
          </font>
       </Label>
       <ComboBox fx:id="ReazAvversa" layoutX="14.0" layoutY="334.0" prefHeight="0.0" prefWidth="150.0" />
-      <Label layoutX="34.0" layoutY="149.0" prefHeight="27.0" prefWidth="115.0" text="Data Reazione">
+      <Label layoutX="34.0" layoutY="102.0" prefHeight="27.0" prefWidth="115.0" text="Data Reazione">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="DataReTextfield" layoutX="17.0" layoutY="188.0" promptText="--/--/----" />
+      <TextField fx:id="DataReTextfield" layoutX="17.0" layoutY="151.0" promptText="--/--/----" />
    </children>
 </AnchorPane>

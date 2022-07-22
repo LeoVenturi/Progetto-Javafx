@@ -43,6 +43,7 @@ public class ControllerInterfacciaMedico {
     	stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
+        stage.setTitle("Segnalazione");
         stage.show();
     }
     
@@ -61,6 +62,7 @@ public class ControllerInterfacciaMedico {
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
+        stage.setTitle("Paziente");
         stage.show();
     }
 
@@ -70,6 +72,7 @@ public class ControllerInterfacciaMedico {
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
+        stage.setTitle("Accesso");
         stage.show();
     }
 

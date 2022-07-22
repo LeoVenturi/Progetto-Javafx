@@ -1,11 +1,6 @@
 package com.example.provajfx;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class Farmacologo extends Accessi{
 	private ArrayList<Medico> medici = new ArrayList<>();
@@ -16,6 +11,7 @@ public class Farmacologo extends Accessi{
 	private Map<String, Integer> num_segnalazioni_provincia = new TreeMap<>();
 	private Map<String, Integer> num_segnalazioni_sede = new HashMap<>();
 	private int segnalazioni_gravi_tot = 0;
+	private Calendar oggi = Calendar.getInstance();
 	
 	public Farmacologo(String pass, String nomeUtente) {
 		super(pass, nomeUtente);
@@ -38,11 +34,20 @@ public class Farmacologo extends Accessi{
 		
 	}
 	public String SegnalazioniGravi() {
+		oggi.getTime();
+		int giorno = oggi.DAY_OF_WEEK;
 		segnalazioni_gravi_tot = 0;
 		for(Medico medico: medici) {
 			for(Paziente paziente: medico.getPazienti()) {
 				for(Segnalazioni segnalazione: paziente.getSegnalazioni()) {
-					if(segnalazione.getReazione().getLivello() > 2 )
+
+					Calendar cal = Calendar.getInstance();		// prendo il primo giorno della settimana
+					cal.add(Calendar.DAY_OF_MONTH, - giorno);
+					Date inizioSettimana = cal.getTime();
+
+					if(segnalazione.getReazione().getLivello() > 2 &&
+							(segnalazione.getData().after(inizioSettimana) ||
+									segnalazione.getData().equals(inizioSettimana)))
 						segnalazioni_gravi_tot ++;
 				}
 			}
@@ -50,11 +55,11 @@ public class Farmacologo extends Accessi{
 		String result = "";
 		return result += "\n Numero di segnalazioni gravi in settimana = " + segnalazioni_gravi_tot + "\n";
 	}
-	
+
 	public String SegnalazioneVaccino() {
 		AzzeraSegnalazioni();
 		String result = "\n Segnalazioni per vaccino: \n";
-		
+
 		for(Medico medico: medici) {
 			for(Paziente paziente: medico.getPazienti()) {
 				int num = 0;
@@ -63,19 +68,19 @@ public class Farmacologo extends Accessi{
 				for(Vaccinazioni vaccini: paziente.getVaccino()) {
 					if(num_segnalazioni.containsKey(vaccini.getVaccino())) {
 						int temp = num_segnalazioni.get(vaccini.getVaccino());
-						num_segnalazioni.put(vaccini.getVaccino(), temp + num);		
+						num_segnalazioni.put(vaccini.getVaccino(), temp + num);
 					}
 					else
 						num_segnalazioni.put(vaccini.getVaccino(), num);
 				}
 			}
 		}
-		
+
 		for(String temp: num_segnalazioni.keySet())
 			result += temp + " = " + num_segnalazioni.get(temp) + "\n";
 		return result;
 	}
-	
+
 	public String SegnalazioniSede(){
 		AzzeraSedi();
 		String result = "\n Segnalazioni per sede: \n";
@@ -96,18 +101,18 @@ public class Farmacologo extends Accessi{
 		}
 		for(String temp: num_segnalazioni_sede.keySet())
 			result += temp + " = " + num_segnalazioni_sede.get(temp) + "\n";
-		
+
 		return result;
 	}
-	
+
 	public String SegnalazioniProvincia() {
 		AzzeraProvincie();
 		String result = "Segnalazioni per provincia: \n";
-	
+
 		//segnalazioni per vaccino
 		for(Medico medico: medici) {
 			for(Paziente paziente: medico.getPazienti()) {
-													
+
 				if(num_segnalazioni_provincia.containsKey(paziente.getProvincia())) {
 					int num = num_segnalazioni_provincia.get(paziente.getProvincia());
 					for(Segnalazioni segnalazione: paziente.getSegnalazioni()) {
@@ -121,17 +126,17 @@ public class Farmacologo extends Accessi{
 						num++;
 					}
 					num_segnalazioni_provincia.put(paziente.getProvincia(), num);
-					
+
 				}
-					
-					
+
+
 			}
 		}
 		for(String provincia: num_segnalazioni_provincia.keySet())
 			result += provincia  + " = " + num_segnalazioni_provincia.get(provincia) + "\n";
-		
+
 		return result;
-		
+
 	}
 	
 	public void AzzeraSegnalazioni() {
@@ -154,7 +159,7 @@ public class Farmacologo extends Accessi{
 		String result = SegnalazioniGravi() + SegnalazioneVaccino() + SegnalazioniSede() + SegnalazioniProvincia();
 		return result;
 	}
-	
+
 	public ArrayList<Medico> getMedici(){return medici;}
 	
 	

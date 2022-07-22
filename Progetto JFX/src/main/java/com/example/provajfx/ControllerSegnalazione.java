@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 
@@ -25,10 +26,6 @@ public class ControllerSegnalazione implements Initializable{ // aggiunge sia se
 
     @FXML
     private ComboBox PazienteCombobox;
-    @FXML
-    private TextField DataTextfield;
-    @FXML
-    private TextField DataReTextfield;
     @FXML
     private ComboBox RischioCombobox;
     @FXML
@@ -46,8 +43,8 @@ public class ControllerSegnalazione implements Initializable{ // aggiunge sia se
     private static Medico medico;
 
     public void invia(ActionEvent event) throws IOException {
-        String currentdata = DataTextfield.getText();
-        String dataRe = DataTextfield.getText();
+        Date dataOggi = new Date();
+        Date dataRe = dataOggi;
         String descrizione = DescrizioneTextarea.getText();
         
         int grav = (int) RischioCombobox.getSelectionModel().getSelectedItem();
@@ -56,17 +53,13 @@ public class ControllerSegnalazione implements Initializable{ // aggiunge sia se
 
         String codMed = medico.toString();
         
-        for(Paziente i: medico.getPazienti()) {
+        for(Paziente i: medico.getPazienti()) {                                         //cerchiamo paziente con questo codice
         	if (i.getCodice() == Integer.parseInt(cod)) {
-
                 int codPaz = i.getCodice();
-
         		ReazioneAvversa r1 = new ReazioneAvversa(reazione, grav, descrizione);
-
                 int codRe = r1.getCodice();
-
-        		Segnalazioni s1 = new Segnalazioni(i, r1, currentdata, dataRe, codMed, codPaz, codRe);
-        
+        		Segnalazioni s1 = new Segnalazioni(i, r1, dataOggi, dataRe, codMed, codPaz, codRe);
+                i.addSegnalazione(s1);
         	}
         }
 
@@ -74,6 +67,7 @@ public class ControllerSegnalazione implements Initializable{ // aggiunge sia se
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
+        stage.setTitle("Interfaccia Medico");
         stage.show();
     }
 
@@ -82,6 +76,7 @@ public class ControllerSegnalazione implements Initializable{ // aggiunge sia se
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
+        stage.setTitle("Interfaccia Medico");
         stage.show();
     }
 

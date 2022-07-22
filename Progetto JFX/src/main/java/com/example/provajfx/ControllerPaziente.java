@@ -9,28 +9,24 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class ControllerPaziente implements Initializable{
     @FXML
-    private TextField TextAnno;
+    private DatePicker AnnoNascita;
     @FXML
     private TextField ProvinciaText;
     @FXML
     private TextField ProfessioneText;
-    @FXML
-    private TextField DataTextfield;
-    @FXML
-    private TextField DataReTextfield;
     @FXML
     private ComboBox ReazioenAvversa;
     @FXML
@@ -52,7 +48,7 @@ public class ControllerPaziente implements Initializable{
     @FXML
     private TextField Sede;
     @FXML
-    private TextField DataV;
+    private DatePicker DataV;
 
     @FXML
     private Button ButtonInvia;
@@ -81,15 +77,19 @@ public class ControllerPaziente implements Initializable{
 
 
     public void invia(ActionEvent event) throws IOException {
-        int anno= Integer.parseInt(TextAnno.getText());
+        LocalDate dataNascita = AnnoNascita.getValue();
+        ZoneId defaultZoneId = ZoneId.systemDefault();
+        Date dataDiNascita = Date.from(dataNascita.atStartOfDay(defaultZoneId).toInstant());
+
         String professione = ProfessioneText.getText();
         String prov = ProvinciaText.getText();
 
-        String currentdata = DataTextfield.getText();
-        String dataRe = DataReTextfield.getText();
+        Date dataOggi = new Date();				// prende la data di oggi
         String descrizione = DescrizioneTextarea.getText();
+
+        Date dataRe = dataOggi;
         
-        Paziente p1 = new Paziente(anno, prov, professione, ListaFattori, ListaVaccini);
+        Paziente p1 = new Paziente(dataDiNascita, prov, professione, ListaFattori, ListaVaccini);
         int codPaz = p1.getCodice();
 
         String codMed = medico.toString();
@@ -101,13 +101,14 @@ public class ControllerPaziente implements Initializable{
         ReazioneAvversa r1 = new ReazioneAvversa(tipo, livello,desc); // reazione adversa
         int codRe = r1.getCodice();
         
-        Segnalazioni segnalazione = new Segnalazioni(p1, r1, currentdata, dataRe, codMed, codPaz, codRe); // segnalazione
+        Segnalazioni segnalazione = new Segnalazioni(p1, r1, dataOggi, dataRe, codMed, codPaz, codRe); // segnalazione
         p1.addSegnalazione(segnalazione);
         medico.aggiungiPaziente(p1);
         root = FXMLLoader.load(getClass().getResource("InterfacciaMedico.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
+        stage.setTitle("Interfaccia Medico");
         stage.show();
     }
 
@@ -121,7 +122,10 @@ public class ControllerPaziente implements Initializable{
     }
 
     public void vaccini(ActionEvent event){
-        String data = DataV.getText();
+        LocalDate localDate = DataV.getValue();
+        ZoneId defaultZoneId = ZoneId.systemDefault();
+        Date data = Date.from(localDate.atStartOfDay(defaultZoneId).toInstant());
+
         String sede = Sede.getText();
         String nome_vacc = (String) NomeVaccino.getSelectionModel().getSelectedItem();
         String dose = (String) TipoSomm.getSelectionModel().getSelectedItem();
@@ -135,6 +139,7 @@ public class ControllerPaziente implements Initializable{
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
+        stage.setTitle("Interfaccia Medico");
         stage.show();
     }
 
