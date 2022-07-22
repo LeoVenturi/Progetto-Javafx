@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
@@ -47,13 +48,6 @@
       <Label layoutX="334.0" layoutY="227.0" text="Sede" />
       <TextField fx:id="Sede" layoutX="273.0" layoutY="259.0" />
       <Label layoutX="335.0" layoutY="295.0" text="Data" />
-      <TextField fx:id="DataV" layoutX="273.0" layoutY="322.0" />
-      <Label layoutX="605.0" layoutY="47.0" prefHeight="27.0" prefWidth="43.0" text="Data">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <TextField fx:id="DataTextfield" layoutX="552.0" layoutY="90.0" promptText="--/--/----" />
       <ComboBox fx:id="RischioCombobox" layoutX="559.0" layoutY="304.0" prefWidth="150.0" />
       <Label layoutX="597.0" layoutY="258.0" prefHeight="27.0" prefWidth="58.0" text="Gravità">
          <font>
@@ -61,11 +55,12 @@
          </font>
       </Label>
       <TextArea fx:id="DescrizioneTextarea" layoutX="559.0" layoutY="366.0" prefHeight="200.0" prefWidth="178.0" promptText="Descrizione" />
-      <ComboBox fx:id="ReazioenAvversa" layoutX="551.0" layoutY="194.0"  prefWidth="150.0" />
+      <ComboBox fx:id="ReazioenAvversa" layoutX="551.0" layoutY="194.0" prefWidth="150.0" />
       <Label layoutX="605.0" layoutY="151.0" prefHeight="27.0" prefWidth="58.0" text="Reazione riscontrata">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
+      <DatePicker fx:id="DataV" layoutX="261.0" layoutY="325.0" />
    </children>
 </AnchorPane>

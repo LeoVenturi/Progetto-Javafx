@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 
@@ -25,8 +26,8 @@ public class ControllerSegnalazione implements Initializable{ // aggiunge sia se
 
     @FXML
     private ComboBox PazienteCombobox;
-    @FXML
-    private TextField DataTextfield;
+//    @FXML
+//    private TextField DataTextfield;		Prendera la datta del giorno stesso
     @FXML
     private ComboBox RischioCombobox;
     @FXML
@@ -44,18 +45,18 @@ public class ControllerSegnalazione implements Initializable{ // aggiunge sia se
     private static Medico medico;
 
     public void invia(ActionEvent event) throws IOException {
-        String data = DataTextfield.getText();
+        //String data = DataTextfield.getText();
+    	Date dataOggi = new Date();
         String descrizione = DescrizioneTextarea.getText();
         
         int grav = (int) RischioCombobox.getSelectionModel().getSelectedItem();	
-        int cod = (int) PazienteCombobox.getSelectionModel().getSelectedItem();
+        String cod = (String) PazienteCombobox.getSelectionModel().getSelectedItem();
         String reazione = (String) ReazAvversa.getSelectionModel().getSelectedItem();
         
         for(Paziente i: medico.getPazienti()) {
-        	if (i.getCodice() == cod) {
+        	if (i.getCodice() == Integer.parseInt(cod)) {
         		ReazioneAvversa r1 = new ReazioneAvversa(reazione, grav, descrizione);
-        		Segnalazioni s1 = new Segnalazioni(i, r1, data);
-        
+        		Segnalazioni s1 = new Segnalazioni(i, r1, dataOggi);
         	}
         }
 

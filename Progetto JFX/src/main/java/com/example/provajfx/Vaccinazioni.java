@@ -2,6 +2,8 @@ package com.example.provajfx;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,10 +18,10 @@ public class Vaccinazioni {
 	private String dosi[] = {"I", "II", "III", "IV", "Dose Unica"};
 	private ArrayList<String> dosi_possibili = new ArrayList<String>(Arrays.asList(dosi));
 	private String sede;
-	private String data_vaccinazione;
+	private Date dataVaccinazione;
 
 
-	public Vaccinazioni(String vaccino, String dose, String sede, String data) {
+	public Vaccinazioni(String vaccino, String dose, String sede, Date dataVaccino) {
 
 		if(vaccini_possibili.contains(vaccino))
 			this.vaccino = vaccino;
@@ -33,9 +35,16 @@ public class Vaccinazioni {
 
 		this.sede = sede;
 
-		//aggiungere controll ovalidità anno
-		this.data_vaccinazione = data;
-
+		Calendar cal = Calendar.getInstance();		// andro a comparare la data attuale con la data attuale -3 min
+		cal.setTime(new Date());
+		cal.add(Calendar.MINUTE, -3);				// sottraggo 3 minuti 
+		Date dateBefore1Days = cal.getTime();
+		Date dataBefore2Month = cal.getTime();		// per il controllo che non sia piu vecchio di 2 mesi
+		
+		if(dataVaccino.after(dateBefore1Days) || dataVaccino.before(dataBefore2Month))	// tecnicamente il new Date prende la data attuale
+			this.dataVaccinazione = dataVaccino;
+		else
+			throw new IllegalArgumentException("Vaccino piu vecchio di 2 mesi oppure data non valida");
 
 	}
 	public String getVaccino() {

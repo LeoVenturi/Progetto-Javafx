@@ -3,6 +3,7 @@ package com.example.provajfx;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Date;
 
 public class Segnalazioni {
 
@@ -11,14 +12,14 @@ public class Segnalazioni {
 	private int codice;
 	private Paziente paziente;
 	private ReazioneAvversa reazione;
-	private String data;
+	private Date data;
 
 
-	public Segnalazioni(Paziente paziente, ReazioneAvversa reazioni, String data) {
+	public Segnalazioni(Paziente paziente, ReazioneAvversa reazioni, Date data) {
 		//aggiungere controlli
 		
 		this.codice = inizio;		// assegno piu incremento
-		inizio = inizio +2;
+		inizio = inizio +1;
 		System.out.println("Il codice usatp -> " + this.codice);
 		this.paziente = paziente;
 		this.reazione = reazioni;
@@ -37,7 +38,7 @@ public class Segnalazioni {
 		return this.reazione;
 	}
 
-	public String getData() {
+	public Date getData() {
 		return this.data;
 	}
 }

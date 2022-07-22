@@ -159,6 +159,7 @@ public class Farmacologo extends Accessi{
 		
 	}
 	
+	
 	public String toString() {
 		String result = SegnalazioniGravi() + SegnalazioneVaccino() + SegnalazioniSede() + SegnalazioniProvincia();
 		return result;

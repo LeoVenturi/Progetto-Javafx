@@ -117,6 +117,8 @@ public class ControllerInterfaceFarmacologo implements Initializable {
     }
 
     public void indietro (ActionEvent event) throws IOException {
+    	
+    	
         root = FXMLLoader.load(getClass().getResource("Accesso.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);

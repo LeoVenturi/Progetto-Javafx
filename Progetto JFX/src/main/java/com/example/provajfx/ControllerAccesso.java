@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class ControllerAccesso {
@@ -51,10 +52,10 @@ public class ControllerAccesso {
     private Medico m4 = new Medico("4", "4");
     private Farmacologo f1 = new Farmacologo("1", "1");
     private FattoreRischio f = new FattoreRischio("a caso", "A caso", 3);
-    private Vaccinazioni v1 = new Vaccinazioni("AstraZeneca", "III", "Roma", "4");
+    private Vaccinazioni v1 = new Vaccinazioni("AstraZeneca", "III", "Roma", new Date());	// new Date prend ela data attuale
     private ArrayList<FattoreRischio> listaFattori = new ArrayList<FattoreRischio>();
     private ArrayList<Vaccinazioni> listaVaccini = new ArrayList<Vaccinazioni>();
-    private Paziente p1 = new Paziente(2, "VR", "alex",listaFattori ,listaVaccini);
+    private Paziente p1 = new Paziente(new Date(), "VR", "alex",listaFattori ,listaVaccini);
     
     private static ArrayList<Medico> listaMedici = new ArrayList<>();
     private static ArrayList<Farmacologo> listaFarmacologo = new ArrayList<>();
