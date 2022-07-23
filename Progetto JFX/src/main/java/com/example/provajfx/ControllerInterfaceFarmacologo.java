@@ -9,10 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
@@ -24,27 +21,9 @@ import java.util.ResourceBundle;
 public class ControllerInterfaceFarmacologo implements Initializable {
 
     @FXML
-    private Label LimSegn;
-    @FXML
-    private Label PropVacc;
-    @FXML
     private Label Testo;
     @FXML
-    private TableView<Segnalazioni> Tabella;
-    @FXML
-    private TableColumn<Segnalazioni, String> colMed;
-    @FXML
-    private TableColumn<Segnalazioni, Integer>  colPaz;
-    @FXML
-    private TableColumn<Segnalazioni, Integer> colRez;
-    @FXML
-    private TableColumn<Segnalazioni, Date> colDataRa;
-    @FXML
-    private TableColumn<Segnalazioni, Date> colDataS;
-    @FXML
-    private TableColumn<Segnalazioni, String> colVacc;
-    @FXML
-    private Button Visto;
+    private ScrollPane Pannello;
     @FXML
     private Button SegnVacc;
     @FXML
@@ -53,8 +32,6 @@ public class ControllerInterfaceFarmacologo implements Initializable {
     private Button SegnProv;
     @FXML
     private Button SegnSede;
-    @FXML
-    private Button Prop;
     @FXML
     private Button VisMess;
     @FXML
@@ -72,11 +49,6 @@ public class ControllerInterfaceFarmacologo implements Initializable {
     int a = 0;
     ObservableList<Segnalazioni> lista = FXCollections.observableArrayList();
 
-
-    public void visto (ActionEvent event) throws IOException {
-        LimSegn.setVisible(false);
-        Visto.setVisible(false);
-    }
 
     public void vis_mess (ActionEvent event) throws IOException {
         AzzMess.setVisible(true);
@@ -152,11 +124,6 @@ public class ControllerInterfaceFarmacologo implements Initializable {
         stage.show();
     }
 
-    public void prop (ActionEvent event) throws IOException {
-        PropVacc.setVisible(false);
-        Prop.setVisible(false);
-    }
-
     public void indietro (ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("Accesso.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -174,37 +141,7 @@ public class ControllerInterfaceFarmacologo implements Initializable {
         f.segnalazioniMedico();
 
         Testo.setText(f.segnalazioniMedico());
-        /*for(Medico med : f.getMedici()) {
-            for(Segnalazioni segnalazione: med.getSegnalazioni())
-                lista.add(segnalazione);
-        }
-
-        colMed.setCellValueFactory(new PropertyValueFactory<Segnalazioni, String>("codMed"));
-        colPaz.setCellValueFactory(new PropertyValueFactory<Segnalazioni, Integer>("codPaz"));
-        colRez.setCellValueFactory(new PropertyValueFactory<Segnalazioni, Integer>("codRe"));
-        colDataRa.setCellValueFactory(new PropertyValueFactory<Segnalazioni, Date>("dataRe"));
-        colDataS.setCellValueFactory(new PropertyValueFactory<Segnalazioni, Date>("dataSegn"));
-        //colVacc.setCellValueFactory(new PropertyValueFactory<Segnalazioni, String>("colVacc"));
-
-        Tabella.setItems(lista);
-
-        if (i == 0){
-            LimSegn.setVisible(false);
-            Visto.setVisible(false);
-        }
-        else{
-            LimSegn.setVisible(true);
-            Visto.setVisible(true);
-        }
-
-        if (a == 0){
-            PropVacc.setVisible(false);
-            Prop.setVisible(false);
-        }
-        else{
-            PropVacc.setVisible(true);
-            Prop.setVisible(true);
-        }*/
+        Pannello.setContent(Testo);
     }
     public void questoFarmacologo(Farmacologo i) {
     	System.out.println(i.toString());

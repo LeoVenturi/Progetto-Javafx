@@ -129,23 +129,33 @@ public class ControllerAccesso {
 
 		} else if(trovaFarmacologo(user, pass)){
 
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("InterfaceFarmacologo.fxml"));
-        	root = loader.load();
-        	
-        	ControllerInterfaceFarmacologo ilFarmacologo = loader.getController();
-        	
-			Farmacologo f2 = ritornaFarmacologo(user,pass);
-        	
-        	ilFarmacologo.questoFarmacologo(f2);
-        	
-        	f2.toString();
-        	f2.SegnalazioneGraviVaccino();
-        	Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-			Scene scene = new Scene(root);
-			stage.setScene(scene);
-			stage.setTitle("Interfaccia Farmacologo");
-			stage.show();
-			
+			Farmacologo f2 = ritornaFarmacologo(user, pass);
+
+			if(f2.controllaMedici() == 1 ){
+				Alert alert = new Alert(AlertType.INFORMATION );
+				alert.setTitle("Farmacologo");
+				alert.setHeaderText("Non sono presenti pazienti");
+				alert.showAndWait();
+				UsenameTextfield.clear();
+				PasswordPasswordfield.clear();
+			}
+			else {
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("InterfaceFarmacologo.fxml"));
+				root = loader.load();
+
+				ControllerInterfaceFarmacologo ilFarmacologo = loader.getController();
+
+				f2 = ritornaFarmacologo(user, pass);
+				ilFarmacologo.questoFarmacologo(f2);
+
+				f2.toString();
+				f2.SegnalazioneGraviVaccino();
+				Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+				Scene scene = new Scene(root);
+				stage.setScene(scene);
+				stage.setTitle("Interfaccia Farmacologo");
+				stage.show();
+			}
 		}else{
 			Alert alert = new Alert(AlertType.INFORMATION );
 			alert.setTitle("Informazione");

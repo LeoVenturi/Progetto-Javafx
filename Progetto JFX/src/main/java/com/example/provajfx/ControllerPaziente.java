@@ -120,7 +120,7 @@ public class ControllerPaziente implements Initializable{
         Segnalazioni segnalazione = new Segnalazioni(p1, r1, dataOggi, dataRe, codMed, codPaz, codRe); // segnalazione
         p1.addSegnalazione(segnalazione);
         System.out.println((int) RischioCombobox.getValue());
-        segnalazione.addGravità((int) RischioCombobox.getValue());
+        segnalazione.addGravita((int) RischioCombobox.getValue());
         if((int) RischioCombobox.getValue() > 3) {
         	Farmacologo.addGravi();
         	System.out.println("è stata agginuta una segnalazione grave");

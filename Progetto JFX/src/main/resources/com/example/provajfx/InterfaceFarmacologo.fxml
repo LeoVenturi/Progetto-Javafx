@@ -2,7 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollBar?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -15,11 +15,14 @@
         <Button fx:id="BackButton" layoutX="635.0" layoutY="12.0" mnemonicParsing="false" onAction="#indietro" prefHeight="55.0" prefWidth="79.0" text="Indietro" />
       <Button fx:id="VisMess" layoutX="493.0" layoutY="14.0" mnemonicParsing="false" onAction="#vis_mess" prefHeight="25.0" prefWidth="121.0" text="Visualizza Messaggi" />
       <Button fx:id="AzzMess" layoutX="493.0" layoutY="45.0" mnemonicParsing="false" onAction="#azz_mess" prefHeight="25.0" prefWidth="121.0" text="Azzera Messaggi" />
-      <Label fx:id="Testo" layoutX="14.0" layoutY="89.0" prefHeight="427.0" prefWidth="699.0" text="Label">
-         <font>
-            <Font size="21.0" />
-         </font>
-      </Label>
-      <ScrollBar layoutX="691.0" layoutY="126.0" orientation="VERTICAL" prefHeight="354.0" prefWidth="22.0" />
+      <ScrollPane fx:id="Pannello" layoutX="14.0" layoutY="82.0" prefHeight="431.0" prefWidth="699.0">
+         <content>
+            <Label fx:id="Testo" text="Label">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Label>
+         </content>
+      </ScrollPane>
     </children>
 </AnchorPane>

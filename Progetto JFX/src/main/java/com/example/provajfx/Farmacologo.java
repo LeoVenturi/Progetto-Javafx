@@ -4,7 +4,6 @@ import java.util.*;
 
 public class Farmacologo extends Accessi{
 	private ArrayList<Medico> medici = new ArrayList<>();
-
 	private static boolean segnale = false;		// messa a static in modo che tutti i farmacologi abbiano lo stesso attributo
 	private static ArrayList<String> messaggi = new ArrayList();
 	private static int gravi_tot = 0;
@@ -21,6 +20,13 @@ public class Farmacologo extends Accessi{
 	}
 	public void prendiMedici(ArrayList<Medico> l1) {
 		this.medici = l1;
+	}
+
+	public int controllaMedici(){
+		if (medici == null)
+			return 0;
+		else
+			return 1;
 	}
 	
 
@@ -46,7 +52,7 @@ public class Farmacologo extends Accessi{
 					Calendar cal = Calendar.getInstance();		// prendo il primo giorno della settimana
 					cal.add(Calendar.DAY_OF_MONTH, - giorno);
 					Date inizioSettimana = cal.getTime();
-					if(segnalazione.getGravità() > 3 &&
+					if(segnalazione.getGravita() > 3 &&
 							(segnalazione.getData().after(inizioSettimana) ||
 									segnalazione.getData().equals(inizioSettimana)))
 						segnalazioni_gravi_tot ++;
@@ -196,7 +202,7 @@ public class Farmacologo extends Accessi{
 					
 					for(Segnalazioni segnalazione: paziente.getSegnalazioni()) {
 						System.out.println("sdfghj" +  oggi.getMonth());
-						if(vaccini.getData().getMonth() == oggi.getMonth()  && segnalazione.getGravità() > 3 && vaccini.getData().getYear() == oggi.getYear())
+						if(vaccini.getData().getMonth() == oggi.getMonth()  && segnalazione.getGravita() > 3 && vaccini.getData().getYear() == oggi.getYear())
 								num++;
 							
 						
@@ -215,8 +221,8 @@ public class Farmacologo extends Accessi{
 		}
 		for(String temp: segnalazioni_vaccino_gravi_mese.keySet())
 			if(segnalazioni_vaccino_gravi_mese.get(temp) > 5) {
-				Farmacologo.addMessaggio("il vaccino" + temp + "ha raggiungto più di 5 segnalazione");
-				System.out.println("il vaccino" + temp + "ha raggiungto più di 5 segnalazione");
+				Farmacologo.addMessaggio("il vaccino" + temp + "ha raggiunto   \npiù di 5 segnalazione");
+				System.out.println("il vaccino" + temp + "ha raggiunto   \npiù di 5 segnalazione");
 			}
 			else
 				System.out.println("non ha funzionato " + segnalazioni_vaccino_gravi_mese.get(temp) + "vaccino " + temp);
@@ -242,10 +248,10 @@ public class Farmacologo extends Accessi{
 			for(Paziente paziente: medico.getPazienti()) {
 				for(Segnalazioni segnalazione: paziente.getSegnalazioni())
 					result += "Medico:" + segnalazione.codiceMedico() + "\n segnalazioni: \n" +
-							"codice paziente: " + segnalazione.getPaziente().getCodice() +
-							"\n codice reazione avversa: " + segnalazione.getCodiceRe() +
-							"\n data reazione avversa:" + segnalazione.getDataRe() +
-							"\n data segnalazione: " + segnalazione.getData() + "\n" + "\n";
+							"  codice paziente: " + segnalazione.getPaziente().getCodice() +
+							"\n  codice reazione avversa: " + segnalazione.getCodiceRe() +
+							"\n  data reazione avversa:" + segnalazione.getDataRe() +
+							"\n  data segnalazione: " + segnalazione.getData() + "\n" + "\n";
 			}
 		return result;
 	}
