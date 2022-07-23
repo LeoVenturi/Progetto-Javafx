@@ -17,6 +17,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.ResourceBundle;
 
@@ -70,14 +71,14 @@ public class ControllerPaziente implements Initializable{
 
     private final String[] nomi = {"AstraZeneca", "Pfizer", "Moderna", "Sputnik", "Sinovac", "Antinfluenzale"};
     private final ObservableList<String> L_Nomi = FXCollections.observableArrayList(nomi);
-
+    private LocalDate dataNascita;
     ArrayList<FattoreRischio> ListaFattori = new ArrayList<>();
     ArrayList<Vaccinazioni> ListaVaccini = new ArrayList<>();
 
 
 
     public void invia(ActionEvent event) throws IOException {
-        LocalDate dataNascita = AnnoNascita.getValue();
+        dataNascita = AnnoNascita.getValue();
         ZoneId defaultZoneId = ZoneId.systemDefault();
         Date dataDiNascita = Date.from(dataNascita.atStartOfDay(defaultZoneId).toInstant());
 
@@ -88,6 +89,14 @@ public class ControllerPaziente implements Initializable{
         String descrizione = DescrizioneTextarea.getText();
 
         Date dataRe = dataOggi;
+        Calendar due_mesi_fa = Calendar.getInstance();
+        Date due_mesi_fa2 = due_mesi_fa.getTime();
+        due_mesi_fa.add(Calendar.MONTH, -2);
+        
+        for(Vaccinazioni vaccini: ListaVaccini)
+        	if(vaccini.getData().before(dataDiNascita)) {
+        		throw new IllegalArgumentException();
+        	}
         
         Paziente p1 = new Paziente(dataDiNascita, prov, professione, ListaFattori, ListaVaccini);
         int codPaz = p1.getCodice();
@@ -103,6 +112,15 @@ public class ControllerPaziente implements Initializable{
         
         Segnalazioni segnalazione = new Segnalazioni(p1, r1, dataOggi, dataRe, codMed, codPaz, codRe); // segnalazione
         p1.addSegnalazione(segnalazione);
+        System.out.println((int) RischioCombobox.getValue());
+        segnalazione.addGravità((int) RischioCombobox.getValue());
+        if((int) RischioCombobox.getValue() > 3) {
+        	Farmacologo.addGravi();
+        	System.out.println("è stata agginuta una segnalazione grave");
+        }
+        if(Farmacologo.getGravi())
+        	Farmacologo.addMessaggio("sono state raggiunte le 50 segnalazioni gravi");
+
         medico.aggiungiPaziente(p1);
         root = FXMLLoader.load(getClass().getResource("InterfacciaMedico.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -122,6 +140,7 @@ public class ControllerPaziente implements Initializable{
     }
 
     public void vaccini(ActionEvent event){
+
         LocalDate localDate = DataV.getValue();
         ZoneId defaultZoneId = ZoneId.systemDefault();
         Date data = Date.from(localDate.atStartOfDay(defaultZoneId).toInstant());
@@ -129,7 +148,6 @@ public class ControllerPaziente implements Initializable{
         String sede = Sede.getText();
         String nome_vacc = (String) NomeVaccino.getSelectionModel().getSelectedItem();
         String dose = (String) TipoSomm.getSelectionModel().getSelectedItem();
-
         ListaVaccini.add(new Vaccinazioni(nome_vacc, dose, sede, data));
         //System.out.printf("Sono qui 2.");
     }

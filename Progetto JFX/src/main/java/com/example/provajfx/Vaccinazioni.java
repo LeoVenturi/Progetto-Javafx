@@ -32,15 +32,16 @@ public class Vaccinazioni {
 
 		Calendar cal = Calendar.getInstance();		// andro a comparare la data attuale con la data attuale -3 min
 		cal.setTime(new Date());
-		cal.add(Calendar.MINUTE, -3);				// sottraggo 3 minuti
+		cal.add(Calendar.MINUTE, +2);				// sottraggo 3 minuti
 		Date dateBefore1Days = cal.getTime();
-		Date dataBefore2Month = cal.getTime();		// per il controllo che non sia piu vecchio di 2 mesi
-
-		if(dataVaccino.after(dateBefore1Days) || dataVaccino.before(dataBefore2Month))	// tecnicamente il new Date prende la data attuale
+		cal.add(Calendar.MONTH, -2);
+		Date dataBefore2Month = cal.getTime(); // per il controllo che non sia piu vecchio di 2 mesi
+		if(dataVaccino.before(dateBefore1Days) && dataVaccino.after(dataBefore2Month))	// tecnicamente il new Date prende la data attuale
 			this.dataVaccinazione = dataVaccino;
-		else
+		else {
+			System.out.println(dataVaccino.toString() + dateBefore1Days.toString());
 			throw new IllegalArgumentException("Vaccino piu vecchio di 2 mesi oppure data non valida");
-
+		}
 	}
 	public String getVaccino() {
 		return this.vaccino;
@@ -51,6 +52,9 @@ public class Vaccinazioni {
 	
 	public String getSede() {
 		return this.sede;
+	}
+	public Date getData() {
+		return this.dataVaccinazione;
 	}
 	
 }

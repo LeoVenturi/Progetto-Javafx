@@ -60,6 +60,11 @@ public class ControllerSegnalazione implements Initializable{ // aggiunge sia se
                 int codRe = r1.getCodice();
         		Segnalazioni s1 = new Segnalazioni(i, r1, dataOggi, dataRe, codMed, codPaz, codRe);
                 i.addSegnalazione(s1);
+                s1.addGravità((int) RischioCombobox.getValue());
+                if((int) RischioCombobox.getValue() > 3)
+                	Farmacologo.addGravi();
+                if(Farmacologo.getGravi())
+                	Farmacologo.addMessaggio("sono state raggiunte le 50 segnalazioni gravi");
         	}
         }
 

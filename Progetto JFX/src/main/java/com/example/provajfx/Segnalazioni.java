@@ -19,6 +19,7 @@ public class Segnalazioni {
 	private ReazioneAvversa reazione;
 	private Date dataSegn;
 	private Date dataRe;
+	private int gravità;
 
 	//lista vaccini ultimi 2 mesi
 	public Segnalazioni(Paziente paziente, ReazioneAvversa reazioni, Date datasegn, Date datare, String codmed, int codpaz, int codre) {
@@ -55,5 +56,12 @@ public class Segnalazioni {
 
 	public String toString() {
 		return this.codice + "";
+	}
+	public void addGravità(int gravità) {
+		this.gravità = gravità;
+		
+	}
+	public int getGravità() {
+		return this.gravità;
 	}
 }

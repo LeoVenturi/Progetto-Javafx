@@ -5,11 +5,13 @@ import java.util.*;
 public class Farmacologo extends Accessi{
 	private ArrayList<Medico> medici = new ArrayList<>();
 
-	static boolean segnale = false;		// messa a static in modo che tutti i farmacologi abbiano lo stesso attributo
-
+	private static boolean segnale = false;		// messa a static in modo che tutti i farmacologi abbiano lo stesso attributo
+	private static ArrayList<String> messaggi = new ArrayList();
+	private static int gravi_tot = 0;
 	private Map<String, Integer> num_segnalazioni = new HashMap<>();
 	private Map<String, Integer> num_segnalazioni_provincia = new TreeMap<>();
 	private Map<String, Integer> num_segnalazioni_sede = new HashMap<>();
+	private Map<String, Integer> segnalazioni_vaccino_gravi_mese = new HashMap<>();
 	private int segnalazioni_gravi_tot = 0;
 	private Calendar oggi = Calendar.getInstance();
 	
@@ -44,8 +46,7 @@ public class Farmacologo extends Accessi{
 					Calendar cal = Calendar.getInstance();		// prendo il primo giorno della settimana
 					cal.add(Calendar.DAY_OF_MONTH, - giorno);
 					Date inizioSettimana = cal.getTime();
-
-					if(segnalazione.getReazione().getLivello() > 2 &&
+					if(segnalazione.getGravità() > 3 &&
 							(segnalazione.getData().after(inizioSettimana) ||
 									segnalazione.getData().equals(inizioSettimana)))
 						segnalazioni_gravi_tot ++;
@@ -63,9 +64,15 @@ public class Farmacologo extends Accessi{
 		for(Medico medico: medici) {
 			for(Paziente paziente: medico.getPazienti()) {
 				int num = 0;
-				for(Segnalazioni segnalazione: paziente.getSegnalazioni())
-					num++;
 				for(Vaccinazioni vaccini: paziente.getVaccino()) {
+					for(Segnalazioni segnalazione: paziente.getSegnalazioni()) {
+						Date due_mesi_prima = new Date(segnalazione.getData().getYear(), segnalazione.getData().getMonth() -2, segnalazione.getData().getDay());
+						if(vaccini.getData().before(due_mesi_prima) || vaccini.getData().after(segnalazione.getData()));
+						else
+							num++;
+							
+						
+					}
 					if(num_segnalazioni.containsKey(vaccini.getVaccino())) {
 						int temp = num_segnalazioni.get(vaccini.getVaccino());
 						num_segnalazioni.put(vaccini.getVaccino(), temp + num);
@@ -162,6 +169,72 @@ public class Farmacologo extends Accessi{
 
 	public ArrayList<Medico> getMedici(){return medici;}
 	
+	static void addGravi() {
+		gravi_tot++;
+	}
+	
+	static Boolean getGravi() {
+		if(Farmacologo.gravi_tot > 50)
+			return true;
+		else
+			return false;
+	}
+	static void addMessaggio(String messaggio) {
+		messaggi.add(messaggio);
+	}
+	public void SegnalazioneGraviVaccino() {
+		AzzeraSegnalazioniGraviVaccino();
+		
+		Date oggi = new Date();
+		
+		String result = "\n Segnalazioni per vaccino: \n";
+
+		for(Medico medico: medici) {
+			for(Paziente paziente: medico.getPazienti()) {
+				int num = 0;
+				for(Vaccinazioni vaccini: paziente.getVaccino()) {
+					
+					for(Segnalazioni segnalazione: paziente.getSegnalazioni()) {
+						System.out.println("sdfghj" +  oggi.getMonth());
+						if(vaccini.getData().getMonth() == oggi.getMonth()  && segnalazione.getGravità() > 3 && vaccini.getData().getYear() == oggi.getYear())
+								num++;
+							
+						
+					}
+					if(segnalazioni_vaccino_gravi_mese.containsKey(vaccini.getVaccino())) {
+						int temp = segnalazioni_vaccino_gravi_mese.get(vaccini.getVaccino());
+						segnalazioni_vaccino_gravi_mese.put(vaccini.getVaccino(), temp + num);
+						System.out.println("segnalazioni di " + vaccini + "= " + temp + num);
+					}
+					else {
+						segnalazioni_vaccino_gravi_mese.put(vaccini.getVaccino(), num);
+						System.out.println("segnalazioni di " + vaccini + "= " + num);
+					}
+				}
+			}
+		}
+		for(String temp: segnalazioni_vaccino_gravi_mese.keySet())
+			if(segnalazioni_vaccino_gravi_mese.get(temp) > 5) {
+				Farmacologo.addMessaggio("il vaccino" + temp + "ha raggiungto più di 5 segnalazione");
+				System.out.println("il vaccino" + temp + "ha raggiungto più di 5 segnalazione");
+			}
+			else
+				System.out.println("non ha funzionato " + segnalazioni_vaccino_gravi_mese.get(temp) + "vaccino " + temp);
+			
+		
+		
+	}
+	public void AzzeraSegnalazioniGraviVaccino() {
+		for(String temp: segnalazioni_vaccino_gravi_mese.keySet())
+			segnalazioni_vaccino_gravi_mese.put(temp, 0);
+	}
+	
+	public String visualizzaMessaggi() {
+		String result = "";
+		for(String messaggio: messaggi)
+			result += messaggio + "\n";
+		return result;
+	}
 	
 
 }

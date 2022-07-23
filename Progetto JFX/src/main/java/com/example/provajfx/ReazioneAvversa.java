@@ -21,9 +21,7 @@ public class ReazioneAvversa {
 		this.codice = codice_assegnato;
 		codice_assegnato ++;
 
-		if(livello < 1 || livello > 5)
-			throw new IllegalArgumentException();
-		else this.livello = livello;
+		this.livello = livello;
 		if(nomeUnivoco.contains(codice))
 			this.nome = codice;
 		else
