@@ -5,7 +5,7 @@ import javafx.scene.control.Label;
 
 public class ControllerFaSegnalazioniProv {
     @FXML
-    Label nameLabel;
+    private Label nameLabel;
 
     public void displayName(String input) {
         nameLabel.setText(input);

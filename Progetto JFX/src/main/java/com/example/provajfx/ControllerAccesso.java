@@ -8,12 +8,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.ValueAxis;
-import javafx.scene.control.Alert;
+import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import com.example.provajfx.Medico;
 
@@ -29,8 +25,8 @@ public class ControllerAccesso {
 
 	@FXML
     private TextField UsenameTextfield;
-    @FXML
-    private TextField PasswordTextfield;
+	@FXML
+	private PasswordField PasswordPasswordfield;
     @FXML
     private Button AccediButton;
     
@@ -99,7 +95,7 @@ public class ControllerAccesso {
 
     public void accedi(ActionEvent event) throws IOException{
         String user = UsenameTextfield.getText();
-        String pass = PasswordTextfield.getText();
+        String pass = PasswordPasswordfield.getText();
         medico = ritornaMedico(user,pass);
 		farmacologo = ritornaFarmacologo(user, pass);
         
@@ -156,7 +152,7 @@ public class ControllerAccesso {
 			alert.setHeaderText("La password o username incorretti");
 			alert.showAndWait();
 			UsenameTextfield.clear();
-			PasswordTextfield.clear();
+			PasswordPasswordfield.clear();
 		}
 	}
 

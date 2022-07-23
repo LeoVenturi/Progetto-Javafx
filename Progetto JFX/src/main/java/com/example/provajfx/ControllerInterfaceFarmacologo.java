@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class ControllerInterfaceFarmacologo implements Initializable {
@@ -27,17 +28,19 @@ public class ControllerInterfaceFarmacologo implements Initializable {
     @FXML
     private Label PropVacc;
     @FXML
+    private Label Testo;
+    @FXML
     private TableView<Segnalazioni> Tabella;
     @FXML
     private TableColumn<Segnalazioni, String> colMed;
     @FXML
     private TableColumn<Segnalazioni, Integer>  colPaz;
     @FXML
-    private TableColumn<Segnalazioni, String> colRez;
+    private TableColumn<Segnalazioni, Integer> colRez;
     @FXML
-    private TableColumn<Segnalazioni, String > colDataRa;
+    private TableColumn<Segnalazioni, Date> colDataRa;
     @FXML
-    private TableColumn<Segnalazioni, String> colDataS;
+    private TableColumn<Segnalazioni, Date> colDataS;
     @FXML
     private TableColumn<Segnalazioni, String> colVacc;
     @FXML
@@ -53,6 +56,10 @@ public class ControllerInterfaceFarmacologo implements Initializable {
     @FXML
     private Button Prop;
     @FXML
+    private Button VisMess;
+    @FXML
+    private Button AzzMess;
+    @FXML
     private Button BackButton;
 
     private Stage stage;
@@ -61,8 +68,9 @@ public class ControllerInterfaceFarmacologo implements Initializable {
     private static Farmacologo f;
 
 
-    int i = 1;
-    int a = 1;
+    int i = 0;
+    int a = 0;
+    ObservableList<Segnalazioni> lista = FXCollections.observableArrayList();
 
 
     public void visto (ActionEvent event) throws IOException {
@@ -70,11 +78,33 @@ public class ControllerInterfaceFarmacologo implements Initializable {
         Visto.setVisible(false);
     }
 
-    public void segn_vacc (ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("FaSeganlazioniVaccino.fxml"));
+    public void vis_mess (ActionEvent event) throws IOException {
+        AzzMess.setVisible(true);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("FaSegnalazioniProv.fxml"));
         Parent root = loader.load();
-        ControllerFaSeganlazioniVaccino scene2Controller = loader.getController();
-        scene2Controller.displayName(f.SegnalazioneVaccino());
+        ControllerFaSegnalazioniProv scene23Controller = loader.getController();
+        String mess = f.visualizzaMessaggi();
+        System.out.println(mess);
+        scene23Controller.displayName(mess);
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Messaggi");
+        stage.show();
+    }
+
+    public void azz_mess (ActionEvent event) throws IOException {
+        VisMess.setVisible(false);
+        AzzMess.setVisible(false);
+        f.segnalazioniMedico();
+    }
+
+    public void segn_vacc (ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("FaSegnalazioniProv.fxml"));
+        Parent root = loader.load();
+        ControllerFaSegnalazioniProv scene21Controller = loader.getController();
+        String vacc = f.SegnalazioneVaccino();
+        System.out.println(vacc);
+        scene21Controller.displayName(vacc);
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.setTitle("Segnalazioni Vaccino");
@@ -82,10 +112,12 @@ public class ControllerInterfaceFarmacologo implements Initializable {
     }
 
     public void segn_grav (ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("FaSegnalazioniGravi.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("FaSegnalazioniProv.fxml"));
         Parent root = loader.load();
-        ControllerFaSegnalazioniGravi scene2Controller = loader.getController();
-        scene2Controller.displayName(f.SegnalazioniGravi());
+        ControllerFaSegnalazioniProv scene22Controller = loader.getController();
+        String grav = f.SegnalazioniGravi();
+        System.out.println(grav);
+        scene22Controller.displayName(grav);
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.setTitle("Segnalazioni Gravi");
@@ -96,8 +128,10 @@ public class ControllerInterfaceFarmacologo implements Initializable {
     public void segn_prov (ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("FaSegnalazioniProv.fxml"));
         Parent root = loader.load();
-        ControllerFaSegnalazioniProv scene2Controller = loader.getController();
-        scene2Controller.displayName(f.SegnalazioniProvincia());
+        ControllerFaSegnalazioniProv scene23Controller = loader.getController();
+        String prov = f.SegnalazioniProvincia();
+        System.out.println(prov);
+        scene23Controller.displayName(prov);
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.setTitle("Segnalazioni Provincia");
@@ -105,10 +139,13 @@ public class ControllerInterfaceFarmacologo implements Initializable {
     }
 
     public void segn_sede (ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("FaSeganlazioniSede.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("FaSegnalazioniProv.fxml"));
         Parent root = loader.load();
-        ControllerFaSeganlazioniSede scene2Controller = loader.getController();
-        scene2Controller.displayName(f.SegnalazioniSede());
+        ControllerFaSegnalazioniProv scene24Controller = loader.getController();
+        String sede = f.SegnalazioniSede();
+        //sede = "Provaaaaa";
+        System.out.println(sede);
+        scene24Controller.displayName(f.SegnalazioniSede());
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.setTitle("Segnalazioni Sede");
@@ -129,24 +166,25 @@ public class ControllerInterfaceFarmacologo implements Initializable {
         stage.show();
     }
 
-    ObservableList<Segnalazioni> lista = FXCollections.observableArrayList();
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.f = ControllerAccesso.farmacologo;
+        AzzMess.setVisible(false);
 
-        for(Medico med : f.getMedici()) {
+        this.f = ControllerAccesso.farmacologo;
+        f.segnalazioniMedico();
+
+        Testo.setText(f.segnalazioniMedico());
+        /*for(Medico med : f.getMedici()) {
             for(Segnalazioni segnalazione: med.getSegnalazioni())
                 lista.add(segnalazione);
         }
 
         colMed.setCellValueFactory(new PropertyValueFactory<Segnalazioni, String>("codMed"));
         colPaz.setCellValueFactory(new PropertyValueFactory<Segnalazioni, Integer>("codPaz"));
-        colRez.setCellValueFactory(new PropertyValueFactory<Segnalazioni, String>("codRe"));
-        colDataRa.setCellValueFactory(new PropertyValueFactory<Segnalazioni, String>("dataRe"));
-        colDataS.setCellValueFactory(new PropertyValueFactory<Segnalazioni, String>("dataSegn"));
-        colVacc.setCellValueFactory(new PropertyValueFactory<Segnalazioni, String>("colVacc"));
+        colRez.setCellValueFactory(new PropertyValueFactory<Segnalazioni, Integer>("codRe"));
+        colDataRa.setCellValueFactory(new PropertyValueFactory<Segnalazioni, Date>("dataRe"));
+        colDataS.setCellValueFactory(new PropertyValueFactory<Segnalazioni, Date>("dataSegn"));
+        //colVacc.setCellValueFactory(new PropertyValueFactory<Segnalazioni, String>("colVacc"));
 
         Tabella.setItems(lista);
 
@@ -166,7 +204,7 @@ public class ControllerInterfaceFarmacologo implements Initializable {
         else{
             PropVacc.setVisible(true);
             Prop.setVisible(true);
-        }
+        }*/
     }
     public void questoFarmacologo(Farmacologo i) {
     	System.out.println(i.toString());

@@ -64,4 +64,14 @@ public class Segnalazioni {
 	public int getGravità() {
 		return this.gravità;
 	}
+
+	public Date getDataRe() {
+		return this.dataRe;
+	}
+	public int getCodiceRe() {
+		return this.codRe;
+	}
+	public String codiceMedico() {
+		return this.codMed;
+	}
 }

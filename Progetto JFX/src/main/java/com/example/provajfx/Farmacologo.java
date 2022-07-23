@@ -235,6 +235,23 @@ public class Farmacologo extends Accessi{
 			result += messaggio + "\n";
 		return result;
 	}
-	
+
+	public String segnalazioniMedico() {
+		String result = "";
+		for(Medico medico: medici)
+			for(Paziente paziente: medico.getPazienti()) {
+				for(Segnalazioni segnalazione: paziente.getSegnalazioni())
+					result += "Medico:" + segnalazione.codiceMedico() + "\n segnalazioni: \n" +
+							"codice paziente: " + segnalazione.getPaziente().getCodice() +
+							"\n codice reazione avversa: " + segnalazione.getCodiceRe() +
+							"\n data reazione avversa:" + segnalazione.getDataRe() +
+							"\n data segnalazione: " + segnalazione.getData() + "\n" + "\n";
+			}
+		return result;
+	}
+
+	public void leggiMessaggi() {
+		messaggi = null;
+	}
 
 }

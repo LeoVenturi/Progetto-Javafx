@@ -4,10 +4,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.provajfx.ControllerFaSegnalazioniProv">
+<AnchorPane prefHeight="384.0" prefWidth="732.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.provajfx.ControllerFaSegnalazioniProv">
    <children>
-      <Label layoutX="272.0" layoutY="183.0" text="Label">
+      <Label fx:id="nameLabel" layoutX="162.0" layoutY="30.0" text="Segnalazioni per provincia:">
          <font>
             <Font size="24.0" />
          </font>

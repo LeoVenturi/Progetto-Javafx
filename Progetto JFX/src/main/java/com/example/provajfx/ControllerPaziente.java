@@ -25,6 +25,8 @@ public class ControllerPaziente implements Initializable{
     @FXML
     private DatePicker AnnoNascita;
     @FXML
+    private DatePicker DataRez;
+    @FXML
     private TextField ProvinciaText;
     @FXML
     private TextField ProfessioneText;
@@ -72,6 +74,7 @@ public class ControllerPaziente implements Initializable{
     private final String[] nomi = {"AstraZeneca", "Pfizer", "Moderna", "Sputnik", "Sinovac", "Antinfluenzale"};
     private final ObservableList<String> L_Nomi = FXCollections.observableArrayList(nomi);
     private LocalDate dataNascita;
+    private LocalDate dataReazione;
     ArrayList<FattoreRischio> ListaFattori = new ArrayList<>();
     ArrayList<Vaccinazioni> ListaVaccini = new ArrayList<>();
 
@@ -82,13 +85,17 @@ public class ControllerPaziente implements Initializable{
         ZoneId defaultZoneId = ZoneId.systemDefault();
         Date dataDiNascita = Date.from(dataNascita.atStartOfDay(defaultZoneId).toInstant());
 
+        dataReazione= DataRez.getValue();
+        ZoneId defaultZoneId2 = ZoneId.systemDefault();
+        Date dataDellaReazione = Date.from(dataReazione.atStartOfDay(defaultZoneId2).toInstant());
+
         String professione = ProfessioneText.getText();
         String prov = ProvinciaText.getText();
 
         Date dataOggi = new Date();				// prende la data di oggi
         String descrizione = DescrizioneTextarea.getText();
 
-        Date dataRe = dataOggi;
+        Date dataRe = dataDellaReazione;
         Calendar due_mesi_fa = Calendar.getInstance();
         Date due_mesi_fa2 = due_mesi_fa.getTime();
         due_mesi_fa.add(Calendar.MONTH, -2);

@@ -9,14 +9,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
@@ -24,6 +23,8 @@ import java.util.ResourceBundle;
 
 public class ControllerSegnalazione implements Initializable{ // aggiunge sia segnalazione che reazione avversa
 
+    @FXML
+    private DatePicker DataRez;
     @FXML
     private ComboBox PazienteCombobox;
     @FXML
@@ -42,9 +43,14 @@ public class ControllerSegnalazione implements Initializable{ // aggiunge sia se
     private Parent root;
     private static Medico medico;
 
+    private LocalDate dataReazione;
+
     public void invia(ActionEvent event) throws IOException {
+        dataReazione= DataRez.getValue();
+        ZoneId defaultZoneId = ZoneId.systemDefault();
+        Date dataDellaReazione = Date.from(dataReazione.atStartOfDay(defaultZoneId).toInstant());
         Date dataOggi = new Date();
-        Date dataRe = dataOggi;
+        Date dataRe = dataDellaReazione;
         String descrizione = DescrizioneTextarea.getText();
         
         int grav = (int) RischioCombobox.getSelectionModel().getSelectedItem();
