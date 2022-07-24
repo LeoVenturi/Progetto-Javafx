@@ -3,6 +3,7 @@ package com.example.provajfx;
 import java.util.*;
 
 public class Vaccinazioni {
+
 	
 	private int codice_paziente;
 	private Segnalazioni segnalazioni;
