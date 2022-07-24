@@ -130,7 +130,7 @@ public class ControllerAccesso {
 
 			Farmacologo f2 = ritornaFarmacologo(user, pass);
 
-			if(f2.controllaMedici() == 1 ){
+			/*if(f2.controllaMedici() == 1 ){
 				Alert alert = new Alert(AlertType.INFORMATION );
 				alert.setTitle("Farmacologo");
 				alert.setHeaderText("Non sono presenti pazienti");
@@ -138,7 +138,7 @@ public class ControllerAccesso {
 				UsenameTextfield.clear();
 				PasswordPasswordfield.clear();
 			}
-			else {
+			else {*/
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("InterfaceFarmacologo.fxml"));
 				root = loader.load();
 
@@ -154,7 +154,7 @@ public class ControllerAccesso {
 				stage.setScene(scene);
 				stage.setTitle("Interfaccia Farmacologo");
 				stage.show();
-			}
+			//}
 		}else{
 			Alert alert = new Alert(AlertType.INFORMATION );
 			alert.setTitle("Informazione");
