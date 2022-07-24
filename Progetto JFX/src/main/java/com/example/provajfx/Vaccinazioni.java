@@ -10,6 +10,8 @@ public class Vaccinazioni {
 	private String dose;
 	private String sede;
 	private Date dataVaccinazione;
+	private String vaccini[] = {"AstraZeneca", "Pfizer", "Moderna", "Sputnik", "Sinovac", "Antinfluenzale"};
+	private ArrayList<String> vaccini_possibili = new ArrayList<String>(Arrays.asList(vaccini));
 
 
 	public Vaccinazioni(String vaccino, String dose, String sede, Date dataVaccino) {
