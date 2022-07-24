@@ -14,7 +14,6 @@ public class ReazioneAvversa {
 	private String descrizione;
 	private int livello;
 	private static int codice_assegnato = 0;
-	//private ArrayList<String>() lista = new ArrayList<>();
 	
 	
 	public ReazioneAvversa(String codice, int livello, String descrizione) {
@@ -43,7 +42,4 @@ public class ReazioneAvversa {
 	public int getLivello() {
 		return this.livello;
 	}
-	
-	
-	
 }

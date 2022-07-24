@@ -12,7 +12,6 @@ public class Segnalazioni {
 	private String codMed;
 	private int codPaz;
 	private int codRe;
-	//private List<Vaccinazioni> = new List;
 
 	private int codice;
 	private Paziente paziente;

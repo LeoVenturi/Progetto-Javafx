@@ -115,7 +115,6 @@ public class ControllerInterfaceFarmacologo implements Initializable {
         Parent root = loader.load();
         ControllerFaSegnalazioniProv scene24Controller = loader.getController();
         String sede = f.SegnalazioniSede();
-        //sede = "Provaaaaa";
         System.out.println(sede);
         scene24Controller.displayName(f.SegnalazioniSede());
         Stage stage = new Stage();

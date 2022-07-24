@@ -33,7 +33,6 @@ public class ControllerInterfacciaMedico {
     //Medico medico1= getMedico();
 
     public void segnalazione (ActionEvent event) throws IOException {
-        //root = FXMLLoader.load(getClass().getResource("Segnalazione.fxml"));
     	FXMLLoader loader = new FXMLLoader(getClass().getResource("Segnalazione.fxml"));
     	root = loader.load();
     	
@@ -49,7 +48,6 @@ public class ControllerInterfacciaMedico {
     
 
     public void paziente (ActionEvent event) throws IOException {
-       // root = FXMLLoader.load(getClass().getResource("Paziente.fxml"));
     	
     	System.out.println("numero pazienti registrati -> " + m.getPazienti().size());
     	

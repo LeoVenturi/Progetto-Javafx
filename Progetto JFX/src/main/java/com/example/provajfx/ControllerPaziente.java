@@ -180,7 +180,6 @@ public class ControllerPaziente implements Initializable{
         RischioCombobox.getItems().addAll(1, 2, 3, 4, 5);						// tendina gravita
     }
     public void questoMedico(Medico m) {	// si tira dietro il medico dal login
-    	//System.out.println(m.toString());
     	this.medico = m;
     }
     

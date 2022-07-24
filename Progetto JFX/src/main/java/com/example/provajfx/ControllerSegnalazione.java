@@ -98,7 +98,6 @@ public class ControllerSegnalazione implements Initializable{ // aggiunge sia se
     	ArrayList<String> codici = new ArrayList<>();
     	for(Paziente i: medico.getPazienti()) {
     		codici.add(String.valueOf(i.getCodice()));
-    		//System.out.println(String.valueOf(i.getCodice()));
     	}
     	ObservableList<String> L_Codici = FXCollections.observableArrayList(codici);
     	PazienteCombobox.setItems(L_Codici);

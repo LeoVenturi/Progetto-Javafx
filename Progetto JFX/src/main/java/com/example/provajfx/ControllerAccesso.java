@@ -13,7 +13,6 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import com.example.provajfx.Medico;
 
-// sono stato qyua
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
